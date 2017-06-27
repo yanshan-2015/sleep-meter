@@ -1,4 +1,91 @@
+@20: 0.267rem;
+@30: 0.4rem;
+@40: 0.53rem;
+@50: 0.667rem;
+@60: 0.8rem;
+@70: 0.93rem;
+@100: 1.33rem;
+
 .index{
-  font-size: 1.5rem;
-  color: rebeccapurple;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #f2f6f9;
+}
+.banner{
+  position: relative;
+  width: 100%;
+  height: auto;
+  img{
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .word{
+    position: absolute;
+    left: 0.4rem;
+    bottom: -1.3rem;
+    width: 82%;
+    padding: 0.34rem 0.48rem;
+    font-size: 0.34rem;
+    color: #5a6676;
+    text-indent: 2em;
+    background: rgba(255,255,255,0.6);
+  }
+}
+.sex{
+  width: 82%;
+  margin: 1.8rem auto auto;
+  h1{
+    font-size: 0.45rem;
+    color: #5a6676;
+  }
+  .contain{
+    width: 70%;
+    margin: 0 auto;
+    overflow: hidden;
+    .item{
+      padding-top: @20;
+      img{
+        display: inline-block;
+        vertical-align: bottom;
+        width: @60;
+        height: @60;
+      }
+      i{
+        vertical-align: bottom;
+        font-style: normal;
+        font-size: 0.45rem;
+        color: #5a6676;
+        margin: 0 0 0 0.1rem;
+      }
+      span{
+        display: inline-block;
+        vertical-align: bottom;
+        width: 0.8rem;
+        height: 0.8rem;
+        background-size: 0.4rem;
+      }
+    }
+    .left{
+      float: left;
+      .noneSpan1{
+        background: url("../images/1-index-circle1.png")no-repeat center 85%;
+      }
+      .check1{
+        background: url("../images/1-index-circle1-yes.png")no-repeat center 85%;
+      }
+    }
+    .right{
+      float: right;
+      .noneSpan2{
+        background: url("../images/1-index-circle2.png")no-repeat center 85%;
+      }
+      .check2{
+        background: url("../images/1-index-circle2-yes.png")no-repeat center 85%;
+      }
+    }
+  }
 }

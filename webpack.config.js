@@ -4,7 +4,7 @@ module.exports = {
     context: __dirname + "/src",
     entry: {
         index: "./js/index.js",
-        vendor: ['./js/lib/properScreen.js','./js/lib/properScreen_css.js']
+        vendor: ['./js/lib/properScreen.js','./js/lib/properScreen_css.js'],
     },
     output: {
         filename: "[name].bundle.js",
@@ -31,6 +31,10 @@ module.exports = {
                     "css-loader",
                     "less-loader",
                 ]
+            },
+            {
+                test:/\.(png)|(jpg)$/,
+                loader: "url-loader?limit=50000" //limit参数，代表如果小于大约50k则会自动帮你压缩base64编码的图片
             }
         ]
     },
