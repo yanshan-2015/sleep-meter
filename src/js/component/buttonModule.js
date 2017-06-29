@@ -4,7 +4,6 @@
 
 let Button = function (n) {
     this.text = n.text;
-    this.url = n.url;
     let p = document.createElement('p');
     p.style.textAlign = 'center';
     p.style.fontSize = '0.53rem';
@@ -14,7 +13,7 @@ let Button = function (n) {
     this.dom = div;
     div.setAttribute('id','nextButton');
     div.style.position = 'absolute';
-    div.style.bottom = '1.5rem';
+    div.style.bottom = '1.2rem';
     div.style.left = '18%';
     div.style.zIndex = '100';
     div.style.width = '64%';
@@ -23,21 +22,17 @@ let Button = function (n) {
     div.style.borderRadius = '0.15rem';
     div.style.background = '-webkit-linear-gradient(left, #75c7f0 , #74a0ef)';
     div.style.boxShadow = '0 20px 20px #b7cef4';
-    div.style.display = 'none';
     div.appendChild(p);
-    document.body.appendChild(div);
 };
 Button.prototype.show = function (n) {
-    if(n.show === false){
-        return
-    }
-    this.dom.style.display = 'block';
+    n.dom.appendChild(this.dom);
+    this.dom.style.display = n.show;
 };
 Button.prototype.clicks = function (n) {
     if(n.type === false){
         return
     }
     this.dom.style.background = "#74a0ef";
-    location.href = this.url;
+    location.href = n.url;
 };
 export { Button }

@@ -1,0 +1,70 @@
+@10: 0.133rem;
+@20: 0.267rem;
+@28: 0.373rem;
+@30: 0.4rem;
+@32: 0.43rem;
+@40: 0.53rem;
+@50: 0.667rem;
+@60: 0.8rem;
+@70: 0.93rem;
+@80: 1.06rem;
+@100: 1.33rem;
+@120: 1.6rem;
+
+//字体路径
+@font-path-H: '../fonts/Haettenschweiler.ttf';
+@font-path-T: '../fonts/Tw Cen MT Condensed.ttf';
+
+.initFont(@url, @font){
+  @font-face {
+    font-family: @font;
+    src: url(@url);
+  }
+}
+
+.initFont(@font-path-H, CN);
+.initFont(@font-path-T, ZH);
+
+
+.numStable{
+  position: relative;
+  padding: @60 @30 0 @30;
+  overflow: hidden;
+  div{
+    float: left;
+  }
+  .num{
+    border-bottom: 0.12rem solid #74a0ef;
+    p{
+      font: @120 CN;
+      color: #5a6676;
+    }
+  }
+  .describe{
+    padding: 0.35rem 0 0 0.35rem;
+    h1{
+      font-size: 0.43rem;
+      color: #8795a3;
+      padding-bottom: 0.15rem;
+    }
+    span{
+      font: 0.43rem ZH;
+      color: #8795a3;
+    }
+  }
+}
+
+.decoration{
+  height: @40;
+  line-height: @40;
+  border-left: 0.12rem solid #dadcde;
+  span{
+    color: #dadcde;
+    letter-spacing: 0.05rem;
+  }
+}
+
+#footer{
+  position: relative;
+  padding: 2rem 0 2.5rem;
+}

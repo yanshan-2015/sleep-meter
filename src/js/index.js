@@ -5,6 +5,13 @@
 import '../less/index.less';
 import { Button } from './component/buttonModule';
 
+let checkObj = {
+    dom: document.getElementById('footer'),
+    show: 'block',
+    type: false,
+    text: '开始测试',
+    url: null
+};
 let choseSex = (function () {
     let sexs = {};
     let items = document.getElementsByClassName('item');
@@ -20,17 +27,12 @@ let choseSex = (function () {
             }
             localStorage.sexs = sexs.sex; //本地存起来
             checkObj.type = true;
+            checkObj.url = sexs.sex +'-body.html';
             createButton();
         };
     }
 })();
 
-let checkObj = {
-    show: true,
-    type: false,
-    text: '开始测试',
-    url: 'body-and-age.html'
-};
 let div;
 function createButton() {
     if(!div){
