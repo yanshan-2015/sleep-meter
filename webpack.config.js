@@ -4,6 +4,14 @@ module.exports = {
     context: __dirname + "/src",
     entry: {
         index: "./js/index.js",
+        male: './js/male-body.js',
+        female: './js/female-body.js',
+        height: './js/height.js',
+        weight: './js/weight.js',
+        shoulder: './js/shoulder.js',
+        waistline: './js/waistline.js',
+        hipline: './js/hipline.js',
+        report: './js/report.js',
         vendor: ['./js/lib/properScreen.js','./js/lib/properScreen_css.js'],
     },
     output: {
@@ -33,8 +41,12 @@ module.exports = {
                 ]
             },
             {
-                test:/\.(png)|(jpg)$/,
-                loader: "url-loader?limit=50000" //limit参数，代表如果小于大约50k则会自动帮你压缩base64编码的图片
+                test:/\.(png|jpg)$/,
+                loader: "url-loader?limit=500000" //limit参数，代表如果小于大约50k则会自动帮你压缩base64编码的图片
+            },
+            {
+                test: /\.(svg|eot|woff|ttf)$/,
+                loader: "file-loader"
             }
         ]
     },
