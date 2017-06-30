@@ -5,7 +5,7 @@
 import '../less/common.less'
 import '../less/male-body.less'
 import {Button} from './component/buttonModule'
-import {choseObj} from './component/singleState'
+import {choseObj} from './component/singleChoseModule'
 
 
 let obj = {
