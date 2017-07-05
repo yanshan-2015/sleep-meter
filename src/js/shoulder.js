@@ -21,6 +21,7 @@ let createElement = function () {
     }
     let nextButton = document.getElementById('nextButton');
     nextButton.onclick = function () {
+        localStorage.shoudlerW = inputElement.value;
         div.clicks(checkObj);
     }
 };

@@ -20,6 +20,7 @@ let createElement = function () {
     }
     let nextButton = document.getElementById('nextButton');
     nextButton.onclick = function () {
+        localStorage.waistlineW = inputElement.value;
         div.clicks(checkObj);
     }
 };

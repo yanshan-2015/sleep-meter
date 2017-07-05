@@ -1,5 +1,30 @@
 /**
  * Created by yanshan on 2017/6/28.
+ * create this object:
+ * let obj = {
+        dom: document.getElementById('choseBody'),
+        show: 'block',
+        sex: 'male',
+        num: 6,
+        originImg: [
+            '../images/body/1.png',
+            '../images/body/2.png',
+            '../images/body/3.png',
+            '../images/body/4.png',
+            '../images/body/5.png',
+            '../images/body/6.png'
+        ],
+        activeImg: [
+            '../images/body/1-1.png',
+            '../images/body/2-1.png',
+            '../images/body/3-1.png',
+            '../images/body/4-1.png',
+            '../images/body/5-1.png',
+            '../images/body/6-1.png'
+        ],
+        imgText: ['椭圆型','圆型','正方型','长方型','沙漏型','V型']
+    };
+ *
  */
 
 let choseObj = function (n) {

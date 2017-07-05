@@ -1,5 +1,14 @@
 /**
  * Created by yanshan on 2017/6/27.
+ * create this object:
+ * let checkObj = {
+        dom: document.getElementById('footer'),
+        show: 'block',
+        type: true,
+        text: '获取报告',
+        url: 'report.html'
+    };
+ *
  */
 
 let Button = function (n) {

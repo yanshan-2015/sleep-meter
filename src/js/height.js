@@ -13,6 +13,8 @@ let checkObj = {
     text: '下一步',
     url: 'weight.html'
 };
+
+let div;
 let createElement = function () {
     if(!div){
         div = new Button(checkObj);
@@ -20,11 +22,11 @@ let createElement = function () {
     }
     let nextButton = document.getElementById('nextButton');
     nextButton.onclick = function () {
+        localStorage.bodyHeight = inputElement.value;
         div.clicks(checkObj);
     }
 };
 
-let div;
 let inputElement = document.getElementById('bodyH');
 inputElement.onfocus = function () {
     createElement();
