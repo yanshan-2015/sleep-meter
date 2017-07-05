@@ -1,8 +1,10 @@
+/**
+ * Created by yanshan on 2017/7/5.
+ */
+
 let webpack = require('webpack');
-let HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    devtool: 'eval-source-map',
     context: __dirname + "/src",
     entry: {
         index: "./js/index.js",
@@ -40,15 +42,12 @@ module.exports = {
         ]
     },
     plugins: [
-        new HtmlWebpackPlugin({
-            filename: 'test.html',
-            template: './tmpl/test.html',
+        new webpack.optimize.UglifyJsPlugin(),  //进行压缩
+        new webpack.DefinePlugin({
+            "process.env":{
+                NODE_ENV:JSON.stringify('production')
+            }
         }),
-        new HtmlWebpackPlugin({
-            filename: 'hah.html',
-            template: './tmpl/hah.html'
-        }),
-
         new webpack.optimize.CommonsChunkPlugin({
             name: "vendor",
             filename: "commons.js",
