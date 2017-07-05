@@ -42,7 +42,7 @@ module.exports = {
             },
             {
                 test:/\.(png|jpg)$/,
-                loader: "url-loader?limit=500000" //limit参数，代表如果小于大约50k则会自动帮你压缩base64编码的图片
+                loader: "url-loader?limit=500000"
             },
             {
                 test: /\.(svg|eot|woff|ttf)$/,
@@ -54,7 +54,7 @@ module.exports = {
         new webpack.optimize.CommonsChunkPlugin({
             name: "vendor",
             filename: "commons.js",
-            minChunks: 3,   //有三个以上的地方共用到，那就把它抽取处理器另行打包成公共文件
+            minChunks: 3,
         }),
     ]
 };
