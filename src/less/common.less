@@ -11,19 +11,14 @@
 @100: 1.33rem;
 @120: 1.6rem;
 
-//字体路径
-@font-path-H: '../fonts/Haettenschweiler.ttf';
-@font-path-T: '../fonts/Tw Cen MT Condensed.ttf';
-
-.initFont(@url, @font){
-  @font-face {
-    font-family: @font;
-    src: url(@url);
-  }
+@font-face {
+  font-family: CN;
+  src: url('../fonts/Haettenschweiler.ttf') format('truetype');
 }
-
-.initFont(@font-path-H, CN);
-.initFont(@font-path-T, ZH);
+@font-face {
+  font-family: ZH;
+  src: url('../fonts/TwCenMTCondensed.ttf') format('truetype');
+}
 
 
 .numStable{

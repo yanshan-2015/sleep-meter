@@ -1,8 +1,11 @@
+/**
+ * Created by yanshan on 2017/7/5.
+ */
+
 let webpack = require('webpack');
 let HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    devtool: 'eval-source-map',
     context: __dirname + "/src",
     entry: {
         index: "./js/index.js",
@@ -17,9 +20,9 @@ module.exports = {
         vendor: ['./js/lib/properScreen.js','./js/lib/properScreen_css.js'],
     },
     output: {
-        path: __dirname + "/dist/assets",
-        filename: "[name].bundle.js",
-        publicPath: "/assets/",
+        path: __dirname + "/public",
+        filename: "js/[name].bundle.js",
+        publicPath: "../",
     },
     devServer: {
         contentBase: __dirname + "/src",
@@ -28,31 +31,57 @@ module.exports = {
     },
     module: {
         loaders:[
-            { test: /\.jsx?$/, exclude: /node_modules/,
-                loader: 'babel-loader', query: { presets: ['es2015'] }
+            {
+                test: /\.html$/,
+                loader: "html-loader?-minimize",
+                options: {
+                    attrs:'img:src img:data-src'
+                }
             },
-            { test: /\.css$/, loader: 'style-loader!css-loader'},
-            { test: /\.less$/, loader: 'style-loader!css-loader!less-loader'},
-            { test:/\.(png|jpg)$/, loader: 'url-loader?limit:500000'},
-            { test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-                loader: 'url-loader?limit=10000&name=[path][name].[hash:7].[ext]'
+            {
+                test: /\.jsx?$/,
+                exclude: /node_modules/,
+                loader: 'babel-loader',
+                query: {
+                    presets: ['es2015']
+                }
+            },
+            {
+                test: /\.css$/,
+                loader: ['style-loader','css-loader']
+            },
+            {
+                test: /\.less$/,
+                loader:  ['style-loader','css-loader','less-loader']
+            },
+            {
+                test:/\.(png|jpg)$/,
+                loader: 'url-loader',
+                options: { limit: 1048576 }
+            },
+            {
+                test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+                loader: 'url-loader',
+                options: { limit: 1048576 }
             }
         ]
     },
     plugins: [
         new HtmlWebpackPlugin({
-            filename: 'test.html',
-            template: './tmpl/test.html',
-        }),
-        new HtmlWebpackPlugin({
-            filename: 'hah.html',
-            template: './tmpl/hah.html'
+            title:'慕思睡眠测试系统',
+            filename: 'views/index.html',
+            template: 'views/index.html',
+            inject: true,  //js位于底部。inject为false时,不插入js
+            minify: false,
+            hash: false,
+            chunks: ['index','vendor'], //所需js
+            chunksSortMode: 'dependency', //按照一来关系排序script
         }),
 
         new webpack.optimize.CommonsChunkPlugin({
             name: "vendor",
-            filename: "commons.js",
+            filename: "js/commons.js",
             minChunks: 3,
-        }),
+        })
     ]
 };

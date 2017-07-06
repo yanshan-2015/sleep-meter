@@ -2,28 +2,14 @@
  * Created by yanshan on 2017/6/28.
  * create this object:
  * let obj = {
-        dom: document.getElementById('choseBody'),
-        show: 'block',
-        sex: 'male',
-        num: 6,
-        originImg: [
-            '../images/body/1.png',
-            '../images/body/2.png',
-            '../images/body/3.png',
-            '../images/body/4.png',
-            '../images/body/5.png',
-            '../images/body/6.png'
-        ],
-        activeImg: [
-            '../images/body/1-1.png',
-            '../images/body/2-1.png',
-            '../images/body/3-1.png',
-            '../images/body/4-1.png',
-            '../images/body/5-1.png',
-            '../images/body/6-1.png'
-        ],
-        imgText: ['椭圆型','圆型','正方型','长方型','沙漏型','V型']
-    };
+    dom: document.getElementById('choseBody'),
+    show: 'block',
+    sex: 'male',
+    num: 7,
+    originImg: [ girl1, girl2, girl3, girl4, girl5, girl6, girl7 ],
+    activeImg: [ girl1_1, girl2_2, girl3_3, girl4_4, girl5_5, girl6_6, girl7_7 ],
+    imgText: ['V型','H型','长方型','苹果型','梨型','细沙漏型','粗沙漏型']
+};
  *
  */
 
@@ -70,7 +56,13 @@ choseObj.prototype.show = function (n) {
     n.dom.appendChild(this.dom);
     this.dom.style.display = n.show;
 };
-choseObj.prototype.click = function (n,m) {
+
+choseObj.prototype.click = function (n,m) { //object|i
+    //每次操作后的imgUrl如果数组中没有就存起来
+    let imgArr = [];
+    //do something...
+
+
     let allLi = this.dom.childNodes;
     for(let i=0,li; li=allLi[i]; i++){
         li.childNodes[0].setAttribute('src',n.originImg[i])
