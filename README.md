@@ -1,2 +1,4 @@
 # sleep-meter
-测试
+npm install
+npm run dev
+npm run dist

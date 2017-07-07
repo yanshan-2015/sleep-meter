@@ -4,6 +4,8 @@
 
 let webpack = require('webpack');
 let HtmlWebpackPlugin = require('html-webpack-plugin');
+let OpenBrowserPlugin = require('open-browser-webpack-plugin');
+let FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 
 module.exports = {
     context: __dirname + "/src",
@@ -21,13 +23,11 @@ module.exports = {
     },
     output: {
         path: __dirname + "/public",
-        filename: "js/[name].bundle.js",
-        publicPath: "../",
+        filename: "js/[name].js",
     },
     devServer: {
-        contentBase: __dirname + "/src",
-        inline: true,
-        port: 3000
+        contentBase: __dirname +'/src',
+        port: 3000,
     },
     module: {
         loaders:[
@@ -67,21 +67,30 @@ module.exports = {
         ]
     },
     plugins: [
-        new HtmlWebpackPlugin({
-            title:'慕思睡眠测试系统',
-            filename: 'views/index.html',
-            template: 'views/index.html',
-            inject: true,  //js位于底部。inject为false时,不插入js
-            minify: false,
-            hash: false,
-            chunks: ['index','vendor'], //所需js
-            chunksSortMode: 'dependency', //按照一来关系排序script
+        new webpack.DefinePlugin({
+            "process.env":{
+                NODE_ENV:JSON.stringify('development')
+            }
         }),
-
+        new webpack.HotModuleReplacementPlugin(),
         new webpack.optimize.CommonsChunkPlugin({
             name: "vendor",
             filename: "js/commons.js",
             minChunks: 3,
-        })
+        }),
+
+        new HtmlWebpackPlugin({
+            filename: 'views/index.html',
+            template: 'views/index.html',
+            inject: true,  //js位于底部。inject为false时,不插入js
+            chunks: ['index','vendor'], //所需js
+            chunksSortMode: 'dependency', //按照一来关系排序script
+        }),
+
+        new OpenBrowserPlugin({
+            url: 'http://localhost:3000/views/index.html'
+        }),
+
+        new FriendlyErrorsPlugin()
     ]
 };

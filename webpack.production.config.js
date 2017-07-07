@@ -3,6 +3,7 @@
  */
 
 let webpack = require('webpack');
+let path = require('path');
 let HtmlWebpackPlugin = require('html-webpack-plugin');
 let ExtractTextPlugin = require('extract-text-webpack-plugin');
 let OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
@@ -22,14 +23,9 @@ module.exports = {
         vendor: ['./js/lib/properScreen.js','./js/lib/properScreen_css.js'],
     },
     output: {
-        path: __dirname + "/dist/www\.sleep\.com/",
+        path: __dirname + "/dist/www\.sleep-mater\.com/",
         filename: "js/[name].bundle.js",
         publicPath: "../",
-    },
-    devServer: {
-        contentBase: __dirname + "/src",
-        inline: true,
-        port: 3000
     },
     module: {
         loaders:[
@@ -78,6 +74,12 @@ module.exports = {
         ]
     },
     plugins: [
+        new webpack.DefinePlugin({
+            "process.env":{
+                NODE_ENV:JSON.stringify('production')
+            }
+        }),
+
         new HtmlWebpackPlugin({
             title:'慕思睡眠测试系统',
             filename: 'views/index.html',
@@ -87,7 +89,6 @@ module.exports = {
             hash: false,
             chunks: ['index','vendor'], //所需js
             chunksSortMode: 'dependency', //按照一来关系排序script
-            excludeChunks: ['commons.js','index.bundle.js']
         }),
 
         new HtmlWebpackPlugin({
@@ -119,11 +120,6 @@ module.exports = {
             sourceMap: true
         }),  //进行压缩
 
-        /*new webpack.DefinePlugin({
-            "process.env":{
-                NODE_ENV:JSON.stringify('production')
-            }
-        }),*/
         new webpack.optimize.CommonsChunkPlugin({
             name: "vendor",
             filename: "js/commons.js",
