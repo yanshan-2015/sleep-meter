@@ -40,8 +40,8 @@ let createElement = (function () {
     let lis = clickPare.childNodes;
     for(let i=0,li; li= lis[i]; i++){
         li.onclick = function () {
+            localStorage.bodyShope = this.childNodes[1].innerHTML.substring(0,this.childNodes[1].innerHTML.length-1);
             choseObject.click(obj,i);
-            localStorage.maleBodyShope = this.childNodes[1].innerHTML;
         };
     }
 })();
@@ -63,6 +63,7 @@ inputElement.onfocus = function () {
     }
     let nextButton = document.getElementById('nextButton');
     nextButton.onclick = function () {
+        localStorage.age = inputElement.value;
         button.clicks(checkObj);
     };
 };

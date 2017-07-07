@@ -24,7 +24,7 @@ let loginPram = {
     placeholder: ['请输入姓名','请输入手机号码','请输入验证码'],
     url: 'report.html'
 };
-
+let inputElement = document.getElementById('hiplineW');
 let div;
 let createElement = function () {
     if(!div){
@@ -33,11 +33,11 @@ let createElement = function () {
     }
     let nextButton = document.getElementById('nextButton');
     nextButton.onclick = function () {
+        localStorage.hiplineW = inputElement.value;
         new loginElement(loginPram);
     };
 };
 
-let inputElement = document.getElementById('hiplineW');
 inputElement.onfocus = function () {
     createElement()
 };
