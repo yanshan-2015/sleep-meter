@@ -23,7 +23,7 @@ module.exports = {
     },
     output: {
         path: __dirname + "/public",
-        filename: "js/[name].js",
+        filename: "js/[name].bundle.js",
     },
     devServer: {
         contentBase: __dirname +'/src',
@@ -82,9 +82,47 @@ module.exports = {
         new HtmlWebpackPlugin({
             filename: 'views/index.html',
             template: 'views/index.html',
-            inject: true,  //js位于底部。inject为false时,不插入js
-            chunks: ['index','vendor'], //所需js
-            chunksSortMode: 'dependency', //按照一来关系排序script
+            chunks: ['index','vendor'], 
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'views/male-body.html',
+            template: 'views/male-body.html',
+            chunks: ['male','vendor'], 
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'views/female-body.html',
+            template: 'views/female-body.html',
+            chunks: ['female','vendor'], 
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'views/height.html',
+            template: 'views/height.html',
+            chunks: ['height','vendor'], 
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'views/weight.html',
+            template: 'views/weight.html',
+            chunks: ['weight','vendor'], 
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'views/shoulder.html',
+            template: 'views/shoulder.html',
+            chunks: ['shoulder','vendor'], 
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'views/waistline.html',
+            template: 'views/waistline.html',
+            chunks: ['waistline','vendor'], 
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'views/hipline.html',
+            template: 'views/hipline.html',
+            chunks: ['hipline','vendor'], 
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'views/report.html',
+            template: 'views/report.html',
+            chunks: ['report','vendor'], 
         }),
 
         new OpenBrowserPlugin({

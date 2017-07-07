@@ -84,33 +84,33 @@ module.exports = {
             title:'慕思睡眠测试系统',
             filename: 'views/index.html',
             template: 'views/index.html',
-            inject: true,  //js位于底部。inject为false时,不插入js
+            inject: true,
             minify: false,
             hash: false,
-            chunks: ['index','vendor'], //所需js
-            chunksSortMode: 'dependency', //按照一来关系排序script
+            chunks: ['index','vendor'],
+            chunksSortMode: 'dependency',
         }),
 
         new HtmlWebpackPlugin({
             title:'慕思睡眠测试系统',
             filename: 'views/female-body.html',
             template: 'views/female-body.html',
-            inject: true,  //js位于底部。inject为false时,不插入js
+            inject: true,
             minify: false,
             hash: false,
-            chunks: ['female','vendor'], //所需js
-            chunksSortMode: 'dependency', //按照一来关系排序script
+            chunks: ['female','vendor'],
+            chunksSortMode: 'dependency',
         }),
 
         new HtmlWebpackPlugin({
             title:'慕思睡眠测试系统',
             filename: 'views/male-body.html',
             template: 'views/male-body.html',
-            inject: true,  //js位于底部。inject为false时,不插入js
+            inject: true,
             minify: false,
             hash: false,
-            chunks: ['male','vendor'], //所需js
-            chunksSortMode: 'dependency', //按照一来关系排序script
+            chunks: ['male','vendor'],
+            chunksSortMode: 'dependency',
         }),
 
         new webpack.optimize.UglifyJsPlugin({
@@ -118,7 +118,7 @@ module.exports = {
                 warnings: false
             },
             sourceMap: true
-        }),  //进行压缩
+        }),
 
         new webpack.optimize.CommonsChunkPlugin({
             name: "vendor",
