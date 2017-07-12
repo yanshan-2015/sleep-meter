@@ -27,6 +27,11 @@ module.exports = {
         filename: "js/[name].bundle.js",
         publicPath: "../",
     },
+    resolve: {
+        alias: {
+            'jquery': __dirname + '/src/js/lib/jQuery1.11.3.min.js'
+        }
+    },
     module: {
         loaders:[
             {
@@ -79,7 +84,11 @@ module.exports = {
                 NODE_ENV:JSON.stringify('production')
             }
         }),
-
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery",
+            "window.jQuery": "jquery"
+        }),
         new HtmlWebpackPlugin({
             title:'慕思睡眠测试系统',
             filename: 'views/index.html',
