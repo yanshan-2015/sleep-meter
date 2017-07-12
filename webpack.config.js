@@ -29,6 +29,11 @@ module.exports = {
         contentBase: __dirname +'/src',
         port: 3000,
     },
+    resolve: {
+        alias: {
+            'jquery': __dirname +'/src/js/lib/jQuery1.11.3.min.js'
+        }
+    },
     module: {
         loaders:[
             {
@@ -71,6 +76,11 @@ module.exports = {
             "process.env":{
                 NODE_ENV:JSON.stringify('development')
             }
+        }),
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery",
+            "window.jQuery": "jquery"
         }),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.optimize.CommonsChunkPlugin({
