@@ -8,6 +8,7 @@ import stable from '../images/9-triangle.png'
 
 import { Indicate } from './component/indicateModule';
 import { WifiModule } from './component/WifiModule';
+import setMap from './component/map';
 
 window.onload = function () {
 
@@ -67,4 +68,5 @@ window.onload = function () {
     wifi.createEle();
     wifi.showEle(left);
 
+    setMap();
 };
