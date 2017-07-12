@@ -11,6 +11,7 @@ import needle from '../images/9-point.png'
 import { Indicate } from './component/indicateModule';
 import { WifiModule } from './component/WifiModule';
 import { Distribution } from './component/distributionModule';
+import setMap from './component/map';
 
 window.onload = function () {
 
@@ -93,5 +94,8 @@ window.onload = function () {
     let distribution = new Distribution(distributionObj);
     distribution.createEle();
     distribution.showEle(right);
-    distribution.rotate(colorInfo[colorName][0],colorInfo[colorName][1])
+    distribution.rotate(colorInfo[colorName][0],colorInfo[colorName][1]);
+
+
+    setMap();
 };
