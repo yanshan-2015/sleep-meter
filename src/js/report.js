@@ -5,9 +5,12 @@ import '../less/report.less'
 import femaleImg from '../images/9-girl.png'
 import maleImg from '../images/9-man.png'
 import stable from '../images/9-triangle.png'
+import bgImg from '../images/9-color.png'
+import needle from '../images/9-point.png'
 
 import { Indicate } from './component/indicateModule';
 import { WifiModule } from './component/WifiModule';
+import { Distribution } from './component/distributionModule';
 
 window.onload = function () {
 
@@ -67,4 +70,28 @@ window.onload = function () {
     wifi.createEle();
     wifi.showEle(left);
 
+    //分布图模块
+    let distributionObj = {
+        title: '您的承重区域是：',
+        showName: '绿', //动态传入的数据
+        text: ['较软','适中','硬','加硬'],
+        bgImg: bgImg,
+        needle: needle,
+        color: ['#40c4ff','#ff6e40','#b3ff59','#ff5177']
+    };
+
+    let colorName = distributionObj.showName;
+    let color = distributionObj.color;
+    let colorInfo = {
+        '蓝': [-180, color[0]],
+        '橙': [-120, color[1]],
+        '绿': [-60, color[2]],
+        '红': [0, color[3]]
+    };
+
+    let right = $('#right');
+    let distribution = new Distribution(distributionObj);
+    distribution.createEle();
+    distribution.showEle(right);
+    distribution.rotate(colorInfo[colorName][0],colorInfo[colorName][1])
 };
