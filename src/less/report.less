@@ -14,3 +14,95 @@
     height: 2.98rem;
   }
 }
+#userInfo{
+  width: 98%;
+  padding-left: 2%;
+  margin: 0 auto;
+  ul{
+    overflow: hidden;
+    li{
+      float: left;
+      width: 20%;
+      padding-bottom: @30;
+      margin-left: 3.5%;
+      text-align: center;
+      img{
+        display: inline-block;
+        width: @70;
+        height: @70;
+      }
+      span{
+        font-family: CN;
+        font-weight: bold;
+        font-size: @80;
+        color: #5a6676;
+        letter-spacing: 3px;
+      }
+      i{
+        font-style: normal;
+        font-size: @32;
+        color: #8795a3;
+      }
+      p{
+        padding-top: 0.05rem;
+        font-size: @32;
+        color: #8795a3;
+        border-top: 1px solid #8fa0af;
+      }
+    }
+    .shape{
+      span{
+        color: #8795a3;
+      }
+    }
+  }
+}
+
+.chart{
+  width: 93%;
+  margin: 0 auto;
+  background-color: #fff;
+  border: 1px solid #e1e1e1;
+  box-shadow: 0 5px 5px #eee;
+  overflow: hidden;
+  .top{
+    overflow: hidden;
+    padding: 0.3rem 0.25rem;
+    border: 1px solid #e1e1e1;
+    >div{
+      float: left;
+    }
+    .BMI{
+      width: 16%;
+      height: auto;
+      img{
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      p{
+        text-align: center;
+        font: 0.43rem CN;
+        color: #8fa0af;
+        letter-spacing: 3px;
+      }
+    }
+    #BMI{
+      margin-left: @40;
+      width: 77%;
+    }
+  }
+}
+
+.other{
+  overflow: hidden;
+}
+#left{
+  float: left;
+  width: 49%;
+  border-right: 1px solid #e1e1e1;
+}
+#right{
+  float: left;
+  width: 50%;
+}
