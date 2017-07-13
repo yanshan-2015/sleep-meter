@@ -20,6 +20,7 @@ module.exports = {
         waistline: './js/waistline.js',
         hipline: './js/hipline.js',
         report: './js/report.js',
+        detail: './js/detail.js',
         vendor: ['./js/lib/properScreen.js','./js/lib/properScreen_css.js'],
     },
     output: {
@@ -29,7 +30,8 @@ module.exports = {
     },
     resolve: {
         alias: {
-            'jquery': __dirname + '/src/js/lib/jQuery1.11.3.min.js'
+            'jquery': __dirname + '/src/js/lib/jQuery1.11.3.min.js',
+            'swiper': __dirname +'/src/js/lib/swiper.jquery.js'
         }
     },
     module: {
@@ -51,7 +53,10 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                loader: ['style-loader','css-loader']
+                loader: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: 'css-loader'
+                }),
             },
             {
                 test: /\.less$/,
@@ -87,7 +92,8 @@ module.exports = {
         new webpack.ProvidePlugin({
             $: "jquery",
             jQuery: "jquery",
-            "window.jQuery": "jquery"
+            "window.jQuery": "jquery",
+            Swiper: 'swiper'
         }),
         new HtmlWebpackPlugin({
             title:'慕思睡眠测试系统',
@@ -119,6 +125,70 @@ module.exports = {
             minify: false,
             hash: false,
             chunks: ['male','vendor'],
+            chunksSortMode: 'dependency',
+        }),
+
+        new HtmlWebpackPlugin({
+            filename: 'views/height.html',
+            template: 'views/height.html',
+            inject: true,
+            minify: false,
+            hash: false,
+            chunks: ['height','vendor'],
+            chunksSortMode: 'dependency',
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'views/weight.html',
+            template: 'views/weight.html',
+            inject: true,
+            minify: false,
+            hash: false,
+            chunks: ['weight','vendor'],
+            chunksSortMode: 'dependency',
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'views/shoulder.html',
+            template: 'views/shoulder.html',
+            inject: true,
+            minify: false,
+            hash: false,
+            chunks: ['shoulder','vendor'],
+            chunksSortMode: 'dependency',
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'views/waistline.html',
+            template: 'views/waistline.html',
+            inject: true,
+            minify: false,
+            hash: false,
+            chunks: ['waistline','vendor'],
+            chunksSortMode: 'dependency',
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'views/hipline.html',
+            template: 'views/hipline.html',
+            inject: true,
+            minify: false,
+            hash: false,
+            chunks: ['hipline','vendor'],
+            chunksSortMode: 'dependency',
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'views/report.html',
+            template: 'views/report.html',
+            inject: true,
+            minify: false,
+            hash: false,
+            chunks: ['report','vendor'],
+            chunksSortMode: 'dependency',
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'views/detail.html',
+            template: 'views/detail.html',
+            inject: true,
+            minify: false,
+            hash: false,
+            chunks: ['detail','vendor'],
             chunksSortMode: 'dependency',
         }),
 

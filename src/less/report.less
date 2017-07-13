@@ -107,11 +107,10 @@
   border-left: 1px solid #e1e1e1;
 }
 
-.bed{
+.bed,.shop{
   width: 100%;
-  padding: @40 0 @70;
   text-align: center;
-  span{
+  >span{
     display: inline-block;
     vertical-align: middle;
     color: #74a0ef;
@@ -123,10 +122,58 @@
     height: @50;
     margin: 0 @20;
   }
-  h1{
+  p{
     margin-top: @10;
     font-weight: normal;
     font-size: @28;
     color: #74a0ef;
   }
+}
+.bed{
+  padding: @40 0 @80;
+}
+.shop{
+  padding: @40 0 @30;
+}
+
+.product{
+  position: relative;
+  padding: 1.35rem 0.5rem 0.5rem;
+  background-color: #fff;
+  img{
+    width: 100%;
+    height: auto;
+  }
+  .module{
+    position: absolute;
+    left: 30%;
+    top: -0.6rem;
+    width: 4rem;
+    height: 1.5rem;
+    text-align: center;
+    background: url("../images/9-name.png")no-repeat center;
+    background-size: 100% 100%;
+    p{
+      width: 70%;
+      height: 1.1rem;
+      margin: 0 auto;
+      font: @70 CN;
+      color: #5a6676;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}
+#next{
+  position: absolute;
+  right: @30;
+  bottom: @30;
+  width: 2.13rem;
+  height: 0.53rem;
+  line-height: 0.53rem;
+  text-align: center;
+  border-radius: 0.26rem;
+  background-color: #74c8ef;
+  color: #fff;
 }

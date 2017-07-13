@@ -19,6 +19,7 @@ module.exports = {
         waistline: './js/waistline.js',
         hipline: './js/hipline.js',
         report: './js/report.js',
+        detail: './js/detail.js',
         vendor: ['./js/lib/properScreen.js','./js/lib/properScreen_css.js'],
     },
     output: {
@@ -30,7 +31,8 @@ module.exports = {
     },
     resolve: {
         alias: {
-            'jquery': __dirname +'/src/js/lib/jQuery1.11.3.min.js'
+            'jquery': __dirname +'/src/js/lib/jQuery1.11.3.min.js',
+            'swiper': __dirname +'/src/js/lib/swiper.jquery.js'
         }
     },
     module: {
@@ -79,7 +81,8 @@ module.exports = {
         new webpack.ProvidePlugin({
             $: "jquery",
             jQuery: "jquery",
-            "window.jQuery": "jquery"
+            "window.jQuery": "jquery",
+            Swiper: 'swiper'
         }),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.optimize.CommonsChunkPlugin({
@@ -132,6 +135,11 @@ module.exports = {
             filename: 'views/report.html',
             template: 'views/report.html',
             chunks: ['report','vendor'], 
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'views/detail.html',
+            template: 'views/detail.html',
+            chunks: ['detail','vendor'],
         }),
 
         new OpenBrowserPlugin({

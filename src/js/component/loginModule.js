@@ -15,7 +15,7 @@
  *
  */
 
-let loginElement = function (n){
+let LoginElement = function (n){
     this.title = n.title||'';
 
     let cover = document.createElement('div');
@@ -73,13 +73,24 @@ let loginElement = function (n){
     submit.innerHTML = '提交';
     dialog.appendChild(submit);
     this.submit = submit;
-    submit.onclick = function () {
-        if(n.url===''||n.url===undefined){
-            alert('请赋值正确的url');
-            return
+};
+LoginElement.prototype.postSubmit = function (n) {
+    $.ajax({
+        type: 'POST',
+        url: n.url,
+        data: n.data,
+        dataType: 'jsonp',
+        jsonp: 'jsoncallback',
+        success: function (data) {
+            if(data.msg === 'OK'){
+                alert('数据已提交');
+            }
+        },
+        error:function (data) {
+            console.log(data);
+            alert('数据库异常，请尝试重新提交')
         }
-        location.href = n.url;
-    }
+    })
 };
 
-export { loginElement }
+export { LoginElement }
