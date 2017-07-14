@@ -12,6 +12,7 @@ import { Indicate } from './component/indicateModule';
 import { WifiModule } from './component/WifiModule';
 import { Distribution } from './component/distributionModule';
 import getwx from './component/getWx';
+import setMap from './component/map';
 
 window.onload = function () {
 
@@ -95,7 +96,9 @@ window.onload = function () {
     distribution.rotate(colorInfo[colorName][0],colorInfo[colorName][1]);
 
     //引入微信jssdk和地图
-    getwx();
+    getwx().then(function(res){
+        setMap(res.longitude,res.latitude);
+    });
     //产品详情
     $('#next').click(function () {
        location.href = 'detail.html'
