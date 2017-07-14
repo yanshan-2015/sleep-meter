@@ -23,7 +23,6 @@ module.exports = {
         vendor: ['./js/lib/properScreen.js','./js/lib/properScreen_css.js'],
     },
     output: {
-        path: __dirname + "/public",
         filename: "js/[name].bundle.js",
     },
     devServer: {
