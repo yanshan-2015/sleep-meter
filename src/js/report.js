@@ -11,7 +11,7 @@ import needle from '../images/9-point.png'
 import { Indicate } from './component/indicateModule';
 import { WifiModule } from './component/WifiModule';
 import { Distribution } from './component/distributionModule';
-import setMap from './component/map';
+import getwx from './component/getWx';
 
 window.onload = function () {
 
@@ -80,6 +80,7 @@ window.onload = function () {
         needle: needle,
         color: ['#40c4ff','#ff6e40','#b3ff59','#ff5177']
     };
+
     let colorName = distributionObj.showName;
     let color = distributionObj.color;
     let colorInfo = {
@@ -88,17 +89,12 @@ window.onload = function () {
         '绿': [-60, color[2]],
         '红': [0, color[3]]
     };
+
     let right = $('#right');
     let distribution = new Distribution(distributionObj);
     distribution.createEle();
     distribution.showEle(right);
     distribution.rotate(colorInfo[colorName][0],colorInfo[colorName][1]);
 
-    //产品详情
-    $('#next').click(function () {
-       location.href = 'detail.html'
-    });
-
-    //地图推荐店面
-    setMap();
+    getwx();
 };
