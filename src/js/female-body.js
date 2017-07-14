@@ -22,50 +22,53 @@ import girl4_4 from '../images/body/girl4-4.png'
 import girl5_5 from '../images/body/girl5-5.png'
 import girl6_6 from '../images/body/girl6-6.png'
 import girl7_7 from '../images/body/girl7-7.png'
+window.onload = function () {
+    let obj = {
+        dom: document.getElementById('choseBody'),
+        show: 'block',
+        sex: 'male',
+        num: 7,
+        originImg: [ girl1, girl2, girl3, girl4, girl5, girl6, girl7 ],
+        activeImg: [ girl1_1, girl2_2, girl3_3, girl4_4, girl5_5, girl6_6, girl7_7 ],
+        imgText: ['V型','H型','长方型','苹果型','梨型','细沙漏型','粗沙漏型']
+    };
+    let checkObj = {
+        dom: document.getElementById('footer'),
+        show: 'block',
+        type: true,
+        text: '下一步',
+        url: 'height.html',
+        top: '1.2rem',
+        bottom: '1.5rem',
+        reg: ''
+    };
+    let createElement = (function () {
+        let choseObject = new choseObj(obj);
+        choseObject.show(obj);
 
-let obj = {
-    dom: document.getElementById('choseBody'),
-    show: 'block',
-    sex: 'male',
-    num: 7,
-    originImg: [ girl1, girl2, girl3, girl4, girl5, girl6, girl7 ],
-    activeImg: [ girl1_1, girl2_2, girl3_3, girl4_4, girl5_5, girl6_6, girl7_7 ],
-    imgText: ['V型','H型','长方型','苹果型','梨型','细沙漏型','粗沙漏型']
-};
-
-let createElement = (function () {
-    let choseObject = new choseObj(obj);
-    choseObject.show(obj);
-
-    let clickPare = document.getElementsByClassName('chose')[0];
-    let lis = clickPare.childNodes;
-    for(let i=0,li; li= lis[i]; i++){
-        li.onclick = function () {
-            localStorage.bodyShope = this.childNodes[1].innerHTML.substring(0,this.childNodes[1].innerHTML.length-1);
-            choseObject.click(obj,i);
+        let clickPare = document.getElementsByClassName('chose')[0];
+        let lis = clickPare.childNodes;
+        for(let i=0,li; li= lis[i]; i++){
+            li.onclick = function () {
+                localStorage.bodyShope = this.childNodes[1].innerHTML.substring(0,this.childNodes[1].innerHTML.length-1);
+                choseObject.click(obj,i);
+            };
+        }
+    })();
+    let button,inputElement = document.getElementById('age');
+    inputElement.onfocus = function () {
+        if(!button){
+            button = new Button(checkObj);
+            button.createEle();
+            button.showEle();
+        }
+        let nextButton = document.getElementById('nextButton');
+        nextButton.onclick = function () {
+            if(button.checkVal(inputElement) === true){
+                localStorage.age = inputElement.value;
+                button.clickEle();
+            }
         };
-    }
-})();
-
-let checkObj = {
-    dom: document.getElementById('footer'),
-    show: 'block',
-    type: true,
-    text: '下一步',
-    url: 'height.html'
-};
-
-let button;
-let inputElement = document.getElementById('age');
-inputElement.onfocus = function () {
-    if(!button){
-        button = new Button(checkObj);
-        button.show(checkObj);
-    }
-    let nextButton = document.getElementById('nextButton');
-    nextButton.onclick = function () {
-        localStorage.age = inputElement.value;
-        button.clicks(checkObj);
     };
 };
 

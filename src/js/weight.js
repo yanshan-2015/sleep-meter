@@ -4,29 +4,33 @@
 
 import '../less/weight.less'
 import { Button } from './component/buttonModule'
-
-let checkObj = {
-    dom: document.getElementById('footer'),
-    show: 'block',
-    type: true,
-    text: '下一步',
-    url: 'shoulder.html'
-};
-
-let createElement = function () {
-    if(!div){
-        div = new Button(checkObj);
-        div.show(checkObj);
-    }
-    let nextButton = document.getElementById('nextButton');
-    nextButton.onclick = function () {
-        localStorage.bodyWeight = inputElement.value;
-        div.clicks(checkObj);
-    }
-};
-
-let div;
-let inputElement = document.getElementById('bodyW');
-inputElement.onfocus = function () {
-    createElement()
+window.onload = function () {
+    let checkObj = {
+        dom: document.getElementsByClassName('weight')[0],
+        show: 'block',
+        type: true,
+        text: '下一步',
+        url: 'shoulder.html',
+        top: '0.5rem',
+        bottom: '1.5rem',
+        reg: ''
+    };
+    let button,inputElement = document.getElementById('bodyW');
+    let createElement = function () {
+        if(!button){
+            button = new Button(checkObj);
+            button.createEle();
+            button.showEle();
+        }
+    };
+    inputElement.onfocus = function () {
+        createElement();
+        let nextButton = document.getElementById('nextButton');
+        nextButton.onclick = function () {
+            if(button.checkVal(inputElement) === true){
+                localStorage.bodyWeight = inputElement.value;
+                button.clickEle();
+            }
+        }
+    };
 };

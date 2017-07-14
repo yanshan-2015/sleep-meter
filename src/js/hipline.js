@@ -10,21 +10,22 @@ import { LoginElement } from './component/loginModule'
 import userImg from '../images/8-icon1.png'
 import phoneImg from '../images/8-icon2.png'
 import codeImg from '../images/8-icon3.png'
-
-$(function () {
+window.onload = function () {
     let checkObj = {
-        dom: document.getElementById('footer'),
+        dom: document.getElementsByClassName('hipline')[0],
         show: 'block',
         type: true,
         text: '获取报告',
-        url: ''
+        url: '',
+        top: '4.5rem',
+        bottom: '1.5rem'
     };
     let loginPram = {
         title: '快捷登录以查看测试结果',
         listNum: 3,
         iconUrl: [userImg,phoneImg,codeImg],
         listId: ['name','phone','code'],
-        type: ['text','number','text'],
+        type: ['text','tel','text'],
         placeholder: ['请输入姓名','请输入手机号码','请输入验证码'],
         url: 'report.html'
     };
@@ -57,28 +58,39 @@ $(function () {
             mattresscolor: '',
         },
     };
-
-    let inputElement = document.getElementById('hiplineW');
+    let checkInfo = {};
+    let button,login,inputElement = document.getElementById('hiplineW');
+    function createElement() {
+        if(!button){
+            button = new Button(checkObj);
+            button.createEle();
+            button.showEle();
+        }
+    }
     inputElement.onfocus = function () {
-        createElement()
+        createElement();
+        let nextButton = document.getElementById('nextButton');
+        nextButton.onclick = function () {
+            if(button.checkVal(inputElement) === true){
+                localStorage.hiplineW = inputElement.value;
+                login = new LoginElement(loginPram);
+                pp();
+            }
+        };
     };
 
-    let div;
-    function createElement() {
-        if(!div){
-            div = new Button(checkObj);
-            div.show(checkObj);
-        }
-        $('#nextButton').click(function () {
-            localStorage.hiplineW = inputElement.value;
-            let login = new LoginElement(loginPram);
+    function pp() {
+        let submitBtn = document.getElementById('submit');
+        submitBtn.onclick = function () {
+            checkInfo.phone = $('#phone').val();
+            checkInfo.name = $('#name').val();
+            checkInfo.code = $('#code').val();
+            if(login.checkInfo(checkInfo) === false){
+                $('#phone').val('');
+            }
 
-            $('#submit').click(function () {
-                ajaxParam.data.telphone = $('#phone').val();
-                ajaxParam.data.name = $('#name').val();
-                login.postSubmit(ajaxParam);
-            });
 
-        });
+            //login.postSubmit(ajaxParam);
+        };
     }
-});
+};

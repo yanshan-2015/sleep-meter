@@ -19,7 +19,7 @@ let LoginElement = function (n){
     this.title = n.title||'';
 
     let cover = document.createElement('div');
-    this.coverflow = cover;
+    this.coverflow = cover;     /******************************/
     cover.setAttribute('id','cover');
     document.body.appendChild(cover);
 
@@ -28,7 +28,7 @@ let LoginElement = function (n){
     cover.appendChild(dialog);
 
     let close = document.createElement('div');
-    this.close = close;
+    this.close = close;    /******************************/
     close.setAttribute('id','close');
     dialog.appendChild(close);
     this.close.onclick = function () {
@@ -60,7 +60,9 @@ let LoginElement = function (n){
         item.appendChild(input);
 
         if(n.listId[i] === 'phone'){
+            input.setAttribute('maxlength','11');
             let span = document.createElement('span');
+            this.span = span;  /******************************/
             span.setAttribute('id','codeSpan');
             span.innerHTML = '获取验证码';
             item.appendChild(span);
@@ -72,25 +74,41 @@ let LoginElement = function (n){
     submit.setAttribute('id','submit');
     submit.innerHTML = '提交';
     dialog.appendChild(submit);
-    this.submit = submit;
+    this.submit = submit;   /******************************/
+};
+LoginElement.prototype.getCode = function () {
+
+};
+LoginElement.prototype.checkInfo = function (n) {
+    let phoneReg = /^1[34578]\d{9}$/; //电话正则
+    for(let item in n){
+        if(n[item]===''){
+            alert('输入框不能为空');
+            return
+        }
+        if(phoneReg.test(n.phone) === false){
+            alert('请输入正确的电话号码');
+            return false
+        }
+    }
+
 };
 LoginElement.prototype.postSubmit = function (n) {
-    $.ajax({
-        type: 'POST',
-        url: n.url,
-        data: n.data,
-        dataType: 'jsonp',
-        jsonp: 'jsoncallback',
-        success: function (data) {
-            if(data.msg === 'OK'){
-                alert('数据已提交');
-            }
-        },
-        error:function (data) {
-            console.log(data);
-            alert('数据库异常，请尝试重新提交')
-        }
-    })
-};
 
+    // $.ajax({
+    //     type: 'POST',
+    //     url: n.url,
+    //     data: n.data,
+    //     dataType: 'jsonp',
+    //     jsonp: 'jsoncallback',
+    //     success: function (data) {
+    //         if(data.msg === 'OK'){
+    //             alert('数据已提交');
+    //         }
+    //     },
+    //     error:function (data) {
+    //         alert('数据库异常，请尝试重新提交')
+    //     }
+    // })
+};
 export { LoginElement }

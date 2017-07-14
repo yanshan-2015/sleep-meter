@@ -5,32 +5,35 @@ import '../less/common.less'
 import '../less/height.less'
 import {Button} from './component/buttonModule'
 
-
-let checkObj = {
-    dom: document.getElementsByClassName('height')[0],
-    show: 'block',
-    type: true,
-    text: '下一步',
-    url: 'weight.html'
+window.onload = function () {
+    let checkObj = {
+        dom: document.getElementsByClassName('height')[0],
+        show: 'block',
+        type: true,
+        text: '下一步',
+        url: 'weight.html',
+        top: '6.2rem',
+        bottom: '1.5rem',
+        reg: ''
+    };
+    let button,inputElement = document.getElementById('bodyH');
+    let createElement = function () {
+        if(!button){
+            button = new Button(checkObj);
+            button.createEle();
+            button.showEle();
+        }
+    };
+    inputElement.onfocus = function () {
+        createElement();
+        let nextButton = document.getElementById('nextButton');
+        nextButton.onclick = function () {
+            if(button.checkVal(inputElement) === true){
+                localStorage.bodyHeight = inputElement.value;
+                button.clickEle();
+            }
+        }
+    };
 };
-
-let div;
-let createElement = function () {
-    if(!div){
-        div = new Button(checkObj);
-        div.show(checkObj);
-    }
-    let nextButton = document.getElementById('nextButton');
-    nextButton.onclick = function () {
-        localStorage.bodyHeight = inputElement.value;
-        div.clicks(checkObj);
-    }
-};
-
-let inputElement = document.getElementById('bodyH');
-inputElement.onfocus = function () {
-    createElement();
-};
-
 
 

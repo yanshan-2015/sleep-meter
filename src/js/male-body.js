@@ -21,52 +21,55 @@ import img4_1 from '../images/body/4-1.png'
 import img5_1 from '../images/body/5-1.png'
 import img6_1 from '../images/body/6-1.png'
 
+window.onload = function () {
+    //各自拥有两种状态并进行单选
+    let obj = {
+        dom: document.getElementById('choseBody'),
+        show: 'block',
+        sex: 'male',
+        num: 6,
+        originImg: [img1,img2,img3,img4,img5,img6],
+        activeImg: [img1_1,img2_1,img3_1,img4_1,img5_1,img6_1],
+        imgText: ['椭圆型','圆型','正方型','长方型','沙漏型','V型']
+    };
+    let checkObj = {
+        dom: document.getElementsByClassName('male')[0],
+        show: 'block',
+        type: true,
+        text: '下一步',
+        url: 'height.html',
+        top: '1.2rem',
+        bottom: '1.5rem',
+        reg: /\d+/
+    };
 
-let obj = {
-    dom: document.getElementById('choseBody'),
-    show: 'block',
-    sex: 'male',
-    num: 6,
-    originImg: [img1,img2,img3,img4,img5,img6],
-    activeImg: [img1_1,img2_1,img3_1,img4_1,img5_1,img6_1],
-    imgText: ['椭圆型','圆型','正方型','长方型','沙漏型','V型']
-};
+    let createElement = (function () {
+        let choseObject = new choseObj(obj);
+        choseObject.show(obj);
+        let clickPare = document.getElementsByClassName('chose')[0];
+        let lis = clickPare.childNodes;
+        for(let i=0,li; li= lis[i]; i++){
+            li.onclick = function () {
+                localStorage.bodyShope = this.childNodes[1].innerHTML.substring(0,this.childNodes[1].innerHTML.length-1);
+                choseObject.click(obj,i);
+            };
+        }
+    })();
 
-let createElement = (function () {
-    let choseObject = new choseObj(obj);
-    choseObject.show(obj);
-
-    let clickPare = document.getElementsByClassName('chose')[0];
-    let lis = clickPare.childNodes;
-    for(let i=0,li; li= lis[i]; i++){
-        li.onclick = function () {
-            localStorage.bodyShope = this.childNodes[1].innerHTML.substring(0,this.childNodes[1].innerHTML.length-1);
-            choseObject.click(obj,i);
+    let button,inputElement = document.getElementById('age');
+    inputElement.onfocus = function () {
+        if(!button){
+            button = new Button(checkObj);
+            button.createEle();
+            button.showEle();
+        }
+        let nextButton = document.getElementById('nextButton');
+        nextButton.onclick = function () {
+            if(button.checkVal(inputElement) === true){
+                localStorage.age = inputElement.value;
+                button.clickEle();
+            }
         };
-    }
-})();
-
-let checkObj = {
-    dom: document.getElementById('footer'),
-    show: 'block',
-    type: true,
-    text: '下一步',
-    url: 'height.html'
-};
-
-let button;
-let inputElement = document.getElementById('age');
-inputElement.onfocus = function () {
-    if(!button){
-        button = new Button(checkObj);
-        button.show(checkObj);
-    }
-    let nextButton = document.getElementById('nextButton');
-    nextButton.onclick = function () {
-        localStorage.age = inputElement.value;
-        button.clicks(checkObj);
     };
 };
-
-
 

@@ -4,29 +4,33 @@
 
 import '../less/waistline.less'
 import { Button } from './component/buttonModule'
-
-let checkObj = {
-    dom: document.getElementById('footer'),
-    show: 'block',
-    type: true,
-    text: '下一步',
-    url: 'hipline.html'
-};
-
-let createElement = function () {
-    if(!div){
-        div = new Button(checkObj);
-        div.show(checkObj);
-    }
-    let nextButton = document.getElementById('nextButton');
-    nextButton.onclick = function () {
-        localStorage.waistlineW = inputElement.value;
-        div.clicks(checkObj);
-    }
-};
-
-let div;
-let inputElement = document.getElementById('waistlineW');
-inputElement.onfocus = function () {
-    createElement()
+window.onload = function () {
+    let checkObj = {
+        dom: document.getElementsByClassName('waistline')[0],
+        show: 'block',
+        type: true,
+        text: '下一步',
+        url: 'hipline.html',
+        top: '3.8rem',
+        bottom: '1.5rem',
+        reg: ''
+    };
+    let button,inputElement = document.getElementById('waistlineW');
+    let createElement = function () {
+        if(!button){
+            button = new Button(checkObj);
+            button.createEle();
+            button.showEle();
+        }
+    };
+    inputElement.onfocus = function () {
+        createElement();
+        let nextButton = document.getElementById('nextButton');
+        nextButton.onclick = function () {
+            if(button.checkVal(inputElement) === true){
+                localStorage.waistlineW = inputElement.value;
+                button.clickEle();
+            }
+        }
+    };
 };
