@@ -39,8 +39,7 @@ $(function () {
         hipline: localStorage.hiplineW
     };
     let ajaxParam = {
-        url: 'http://zs.derucci.net/deruccimid/sleep/saveslee',
-        //url: 'http://zs.derucci.net/deruccimid/sleep/savesleepdata',
+        url: 'http://zs.derucci.net/deruccimid/sleep/savesleepdata',
         data: {
             sex: userInformation.sex,
             shape: userInformation.shape,
