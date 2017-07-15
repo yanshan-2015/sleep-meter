@@ -38,7 +38,11 @@ function setMap(jingdu,weidu){
   //
   function paramsData(params){
     let data = params.name.split('~');
-    return '店名：'+data[0]+'</br>'+'地址：'+data[1];
+    if(data[0] != '您的当前位置'){
+      return '店名：'+data[0]+'</br>'+'地址：'+data[1];
+    }else{
+      return data[0];
+    }
   }
 
   //店铺坐标数组赋值
@@ -106,7 +110,7 @@ function setMap(jingdu,weidu){
         zlevel: 12,
         roam: true,
         data: [{
-          name: '您的当前位置。~',
+          name: '您的当前位置~',
           value: [jingdu, weidu]
         }],
         zoom: 1.5,
@@ -131,15 +135,18 @@ function setMap(jingdu,weidu){
       let data = params.data;
       let arr = data.name.split('~');
       let value = data.value;
-      wx.ready(function() {
-        //获取地理位置
-        wx.getLocation({
-          type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
-          success: function(res) {
-            resolve(res);
-          }
-        });
-      })
+      if(arr[0]  != '您的当前位置'){
+        wx.ready(function() {
+          wx.openLocation({
+            latitude: parseFloat(value[1]), // 纬度，浮点数，范围为90 ~ -90
+            longitude: parseFloat(value[0]), // 经度，浮点数，范围为180 ~ -180。
+            name: arr[0], // 位置名
+            address: arr[1], // 地址详情说明
+            scale: 10, // 地图缩放级别,整形值,范围从1~28。默认为最大
+            infoUrl: 'http://derucci.net/ts/views/index.html' // 在查看位置界面底部显示的超链接,可点击跳转
+          });
+        })
+      }
     }
   }
 
