@@ -1,4 +1,5 @@
 import echarts from 'echarts'
+import wx from 'weixin-js-sdk'
 
 function setMap(jingdu,weidu){
   // 中国主要城市列表
@@ -99,6 +100,18 @@ function setMap(jingdu,weidu){
         zoom: 1.5,
         symbol: 'image://../images/9-ball.png',
         symbolSize: [15, 20]
+      },{
+        type: "scatter",
+        coordinateSystem: "geo",
+        zlevel: 12,
+        roam: true,
+        data: [{
+          name: '您的当前位置。~',
+          value: [jingdu, weidu]
+        }],
+        zoom: 1.5,
+        symbol: 'image://../images/9-yellow.png',
+        symbolSize: [15, 20]
       }],
       tooltip: {
         trigger: 'item',
@@ -118,6 +131,15 @@ function setMap(jingdu,weidu){
       let data = params.data;
       let arr = data.name.split('~');
       let value = data.value;
+      wx.ready(function() {
+        //获取地理位置
+        wx.getLocation({
+          type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+          success: function(res) {
+            resolve(res);
+          }
+        });
+      })
     }
   }
 
