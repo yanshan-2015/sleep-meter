@@ -74,23 +74,52 @@ window.onload = function () {
             if(button.checkVal(inputElement) === true){
                 localStorage.hiplineW = inputElement.value;
                 login = new LoginElement(loginPram);
-                pp();
+                submitBtn();
+                getCode();
             }
         };
     };
 
-    function pp() {
+    function submitBtn() {
         let submitBtn = document.getElementById('submit');
         submitBtn.onclick = function () {
+            //检测
             checkInfo.phone = $('#phone').val();
             checkInfo.name = $('#name').val();
             checkInfo.code = $('#code').val();
             if(login.checkInfo(checkInfo) === false){
+                return
+            }
+            if(login.checkInfo(checkInfo) === true){
+                $('#phone').val('');
+                return
+            }
+            //对code进一步调取接口检测，不行进一步return
+                // do something...
+
+            //提交
+            ajaxParam.data.telphone = checkInfo.phone;
+            ajaxParam.data.name = checkInfo.name;
+            login.postSubmit(ajaxParam,function (data) {
+                if(data === 'OK'){
+                    alert('数据已提交');
+                    location.href = 'report.html';
+                }else {
+                    alert('数据库异常，请尝试重新提交');
+                }
+            })
+        };
+    }
+
+    function getCode() {
+        let getCode = document. getElementById('codeSpan');
+        getCode.onclick = function () {
+            checkInfo.phone = $('#phone').val();
+            //做检测
+            if(login.getCode(checkInfo) === false){
                 $('#phone').val('');
             }
-
-
-            //login.postSubmit(ajaxParam);
-        };
+            //调接口
+        }
     }
 };

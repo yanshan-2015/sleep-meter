@@ -76,39 +76,45 @@ let LoginElement = function (n){
     dialog.appendChild(submit);
     this.submit = submit;   /******************************/
 };
-LoginElement.prototype.getCode = function () {
-
+LoginElement.prototype.phoneReg = function (n) {
+    let phoneReg = /^1[34578]\d{9}$/; //电话正则
+    if(phoneReg.test(n.phone) === false){
+        alert('请输入正确的电话号码');
+        return false
+    }
+};
+LoginElement.prototype.getCode = function (n) {
+    if(this.phoneReg(n) === false){
+        return false
+    }
+    //调取短信接口
+    //do something...
 };
 LoginElement.prototype.checkInfo = function (n) {
-    let phoneReg = /^1[34578]\d{9}$/; //电话正则
     for(let item in n){
         if(n[item]===''){
             alert('输入框不能为空');
-            return
-        }
-        if(phoneReg.test(n.phone) === false){
-            alert('请输入正确的电话号码');
             return false
         }
     }
-
+    //减少服务去开销，必须再次进行一次检测为宜
+    if(this.phoneReg(n) === false){
+        return true
+    }
 };
-LoginElement.prototype.postSubmit = function (n) {
-
-    // $.ajax({
-    //     type: 'POST',
-    //     url: n.url,
-    //     data: n.data,
-    //     dataType: 'jsonp',
-    //     jsonp: 'jsoncallback',
-    //     success: function (data) {
-    //         if(data.msg === 'OK'){
-    //             alert('数据已提交');
-    //         }
-    //     },
-    //     error:function (data) {
-    //         alert('数据库异常，请尝试重新提交')
-    //     }
-    // })
+LoginElement.prototype.postSubmit = function (n,callback) {
+    $.ajax({
+        type: 'POST',
+        url: n.url,
+        data: n.data,
+        dataType: 'jsonp',
+        jsonp: 'jsoncallback',
+        success: function (data) {
+            callback(data.msg);
+        },
+        error:function (data) {
+            callback(data.msg);
+        }
+    });
 };
 export { LoginElement }
