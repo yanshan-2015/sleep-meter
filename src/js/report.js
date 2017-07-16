@@ -98,6 +98,8 @@ window.onload = function () {
     //引入微信jssdk和地图
     getwx().then(function(res){
         setMap(res.longitude,res.latitude);
+    }, function(res){
+        setMap(113.62773,22.919127);
     });
     //产品详情
     $('#next').click(function () {

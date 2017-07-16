@@ -46,7 +46,13 @@ function getwx(){
 	        type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
 	        success: function(res) {
 	        	resolve(res);
-	        }
+	        },
+	        fail: function(res) {    //未开启定位功能
+	        	reject(res);
+          },
+          cancel: function (res) {    //用户拒绝授权获取地理位置
+            reject(res);
+          }
 	      });
 	    })
 		})
