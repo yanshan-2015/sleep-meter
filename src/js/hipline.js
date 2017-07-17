@@ -11,9 +11,18 @@ import userImg from '../images/8-icon1.png'
 import phoneImg from '../images/8-icon2.png'
 import codeImg from '../images/8-icon3.png'
 
-import getwx from './component/getWx'
+// import getwx from './component/getWx'
+import getwx from './component/getWx';
 
 window.onload = function () {
+    let _this = this;
+    $('.img').click(function () {
+        getwx().then(function(res){
+            console.log(res)
+        }, function(res){
+            console.log(res)
+        });
+    });
     let checkObj = {
         dom: document.getElementsByClassName('hipline')[0],
         show: 'block',
@@ -63,6 +72,13 @@ window.onload = function () {
             mattresscolor: '',
         },
     };
+    //获取地理位置并赋值给
+    getwx().then(function(res){
+        ajaxParam.data.weidu = res.latitude;
+        ajaxParam.data.jingdu = res.longitude;
+    }, function(res){
+        //do something...
+    });
     let checkInfo = {};
     let button,login,inputElement = document.getElementById('hiplineW');
     function createElement() {
@@ -103,46 +119,41 @@ window.onload = function () {
                 $('#phone').val('');
                 return
             }
-
-            //获取地理位置以便保存
-            //引入微信jssdk和地图
-            getwx().then(function(res){
-                console.log(res)
-                //setMap(res.longitude,res.latitude);
-            }, function(res){
-                //setMap(113.62773,22.919127);
-            });
-
             //对code进检测
-            /*let param = {
-                url: 'http://zs.derucci.net/deruccimid/antifake/verifymsg',
+            let param = {
+                url: 'http://zs.derucci.net/deruccimid/antifake/verifymsgcode',
                 data: {
-                    mobile : checkInfo.phone,
-                    verifyCode : checkInfo.code,
-                    openId: 'haha'
+                    mobile: checkInfo.phone,
+                    verifyCode: checkInfo.code,
                 }
             };
             login.postAjax(param,function (data) {
-                if(data.msg !== "OK"){
+                if(data.success !== true){
+                    alert('验证码无效或过期');
                     return
                 }
-            });*/
-            //提交数据
-            /*ajaxParam.data.telphone = checkInfo.phone;
-            ajaxParam.data.name = checkInfo.name;
-            login.postAjax(ajaxParam,function (data) {
-                if(data.msg === 'OK'){
-                    alert('数据已提交');
-                    location.href = 'report.html';
-                }else {
-                    alert('数据库异常，请尝试重新提交');
-                }
-            })*/
+                ajaxParam.data.telphone = checkInfo.phone;
+                ajaxParam.data.name = checkInfo.name;
+                login.postAjax(ajaxParam,function (data) {
+                    if(data.msg === 'OK'){
+                        alert('数据已提交');
+                        console.log(ajaxParam);
+                        location.href = 'report.html';
+                    }else {
+                        alert('数据库异常，请尝试重新提交');
+                    }
+                })
+            });
         };
     }
-    /*function checkCode() {
+    function checkCode() {
         let checkCode = document. getElementById('codeSpan');
-        checkCode.onclick = function () {
+        checkCode.onclick = function (event) {
+            if(event.stopPropagation){
+                event.stopPropagation();
+            }else{
+                event.cancelBubble = true;
+            }
             checkInfo.phone = $('#phone').val();
             //做检测
             if(login.checkCode(checkInfo) === false){
@@ -159,7 +170,7 @@ window.onload = function () {
                 codeItem(data,checkCode);
             })
         }
-    }*/
+    }
     function codeItem(x,y) {
         switch (x.code){
             case 0: setTime(1000,120,y) ;
@@ -169,7 +180,7 @@ window.onload = function () {
             case 2: alert('两分钟内只能发送一次');
         }
     }
-    function setTime(n,m,dom) {
+    function setTime(n,m,dom,e) {
         dom.innerHTML = m;
         dom.style.backgroundColor = '#e1e1e1';
         let time = setInterval(function () {
