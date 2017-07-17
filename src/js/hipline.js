@@ -10,6 +10,9 @@ import { LoginElement } from './component/loginModule'
 import userImg from '../images/8-icon1.png'
 import phoneImg from '../images/8-icon2.png'
 import codeImg from '../images/8-icon3.png'
+
+import getwx from './component/getWx'
+
 window.onload = function () {
     let checkObj = {
         dom: document.getElementsByClassName('hipline')[0],
@@ -29,6 +32,7 @@ window.onload = function () {
         placeholder: ['请输入姓名','请输入手机号码','请输入验证码'],
         url: 'report.html'
     };
+    //前面储存进来的信息
     let userInformation = {
         sex: localStorage.sexs,
         shape: localStorage.bodyShope,
@@ -39,6 +43,7 @@ window.onload = function () {
         waistline: localStorage.waistlineW,
         hipline: localStorage.hiplineW
     };
+    //保存至服务器的ajax参数
     let ajaxParam = {
         url: 'http://zs.derucci.net/deruccimid/sleep/savesleepdata',
         data: {
@@ -68,14 +73,17 @@ window.onload = function () {
         }
     }
     inputElement.onfocus = function () {
+        //生成btn
         createElement();
         let nextButton = document.getElementById('nextButton');
         nextButton.onclick = function () {
             if(button.checkVal(inputElement) === true){
                 localStorage.hiplineW = inputElement.value;
+                //生成用户信息验证码界面
                 login = new LoginElement(loginPram);
-                submitBtn();
-                getCode();
+                //验证界面的两个行为
+                submitBtn(); //提交处理
+                checkCode(); //验证码处理
             }
         };
     };
@@ -83,43 +91,97 @@ window.onload = function () {
     function submitBtn() {
         let submitBtn = document.getElementById('submit');
         submitBtn.onclick = function () {
-            //检测
             checkInfo.phone = $('#phone').val();
             checkInfo.name = $('#name').val();
             checkInfo.code = $('#code').val();
-            if(login.checkInfo(checkInfo) === false){
+            //检测用户信息
+            let condition = login.checkInfo(checkInfo);
+            if(condition === false){
                 return
             }
-            if(login.checkInfo(checkInfo) === true){
+            if(condition === true){
                 $('#phone').val('');
                 return
             }
-            //对code进一步调取接口检测，不行进一步return
-                // do something...
 
-            //提交
-            ajaxParam.data.telphone = checkInfo.phone;
+            //获取地理位置以便保存
+            //引入微信jssdk和地图
+            getwx().then(function(res){
+                console.log(res)
+                //setMap(res.longitude,res.latitude);
+            }, function(res){
+                //setMap(113.62773,22.919127);
+            });
+
+            //对code进检测
+            /*let param = {
+                url: 'http://zs.derucci.net/deruccimid/antifake/verifymsg',
+                data: {
+                    mobile : checkInfo.phone,
+                    verifyCode : checkInfo.code,
+                    openId: 'haha'
+                }
+            };
+            login.postAjax(param,function (data) {
+                if(data.msg !== "OK"){
+                    return
+                }
+            });*/
+            //提交数据
+            /*ajaxParam.data.telphone = checkInfo.phone;
             ajaxParam.data.name = checkInfo.name;
-            login.postSubmit(ajaxParam,function (data) {
-                if(data === 'OK'){
+            login.postAjax(ajaxParam,function (data) {
+                if(data.msg === 'OK'){
                     alert('数据已提交');
                     location.href = 'report.html';
                 }else {
                     alert('数据库异常，请尝试重新提交');
                 }
-            })
+            })*/
         };
     }
-
-    function getCode() {
-        let getCode = document. getElementById('codeSpan');
-        getCode.onclick = function () {
+    /*function checkCode() {
+        let checkCode = document. getElementById('codeSpan');
+        checkCode.onclick = function () {
             checkInfo.phone = $('#phone').val();
             //做检测
-            if(login.getCode(checkInfo) === false){
+            if(login.checkCode(checkInfo) === false){
                 $('#phone').val('');
             }
             //调接口
+            let param = {
+                url: 'http://zs.derucci.net/deruccimid/antifake/sendmsg',
+                data: {
+                    mobile: checkInfo.phone
+                }
+            };
+            login.postAjax(param,function (data) {
+                codeItem(data,checkCode);
+            })
         }
+    }*/
+    function codeItem(x,y) {
+        switch (x.code){
+            case 0: setTime(1000,120,y) ;
+            break;
+            case 1: alert('请求参数错误');
+            break;
+            case 2: alert('两分钟内只能发送一次');
+        }
+    }
+    function setTime(n,m,dom) {
+        dom.innerHTML = m;
+        dom.style.backgroundColor = '#e1e1e1';
+        let time = setInterval(function () {
+            m--;
+            dom.innerHTML = m;
+            if(m === 0){
+                clearInterval(time);
+                dom.innerHTML = '重新发送';
+                dom.style.backgroundColor = '#fff';
+                return
+            }
+        },n)
+
     }
 };

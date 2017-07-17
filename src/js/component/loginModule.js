@@ -83,12 +83,23 @@ LoginElement.prototype.phoneReg = function (n) {
         return false
     }
 };
-LoginElement.prototype.getCode = function (n) {
+LoginElement.prototype.checkCode = function (n) {
     if(this.phoneReg(n) === false){
         return false
     }
+};
+LoginElement.prototype.getCode = function (n,callback) {
     //调取短信接口
-    //do something...
+     $.ajax({
+     type: "GET",
+     url: n.url,
+     data: n.data,
+     dataType: 'jsonp',
+     jsonp: 'jsoncallback',
+     success: function (data) {
+            callback(data);
+        }
+     })
 };
 LoginElement.prototype.checkInfo = function (n) {
     for(let item in n){
@@ -97,12 +108,12 @@ LoginElement.prototype.checkInfo = function (n) {
             return false
         }
     }
-    //减少服务去开销，必须再次进行一次检测为宜
+    //没有什么多余的方式触碰到服务器
     if(this.phoneReg(n) === false){
         return true
     }
 };
-LoginElement.prototype.postSubmit = function (n,callback) {
+LoginElement.prototype.postAjax = function (n,callback) {
     $.ajax({
         type: 'POST',
         url: n.url,
@@ -110,10 +121,10 @@ LoginElement.prototype.postSubmit = function (n,callback) {
         dataType: 'jsonp',
         jsonp: 'jsoncallback',
         success: function (data) {
-            callback(data.msg);
+            callback(data);
         },
         error:function (data) {
-            callback(data.msg);
+            callback(data);
         }
     });
 };
