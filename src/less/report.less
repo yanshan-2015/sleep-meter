@@ -23,22 +23,34 @@
     li{
       float: left;
       width: 20%;
+      height: 2.1rem;
       padding-bottom: @30;
       margin-left: 3.5%;
       text-align: center;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
       img{
         display: inline-block;
         width: @70;
         height: @70;
+        margin-top: 0.123rem;
       }
       span{
+        display: inline-block;
+        vertical-align: bottom;
         font-family: CN;
         font-weight: bold;
         font-size: @80;
         color: #5a6676;
         letter-spacing: 3px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
       i{
+        display: inline-block;
+        vertical-align: bottom;
         font-style: normal;
         font-size: @32;
         color: #8795a3;
@@ -51,8 +63,24 @@
       }
     }
     .shape{
-      span{
-        color: #8795a3;
+      position: relative;
+      div{
+        position: absolute;
+        width: 100%;
+        bottom: 1.42rem;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        span{
+          font-family: "Microsoft YaHei";
+          font-size: 0.6rem;
+          color: #8795a3;
+        }
+      }
+      p{
+        position: absolute;
+        width: 100%;
+        bottom: 0.72rem;
       }
     }
   }
