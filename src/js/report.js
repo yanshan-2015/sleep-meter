@@ -96,12 +96,11 @@ window.onload = function () {
     distribution.rotate(colorInfo[colorName][0],colorInfo[colorName][1]);
 
     //引入微信jssdk和地图
-    setMap(113.62773,22.919127);
-    // getwx().then(function(res){
-    //     setMap(res.longitude,res.latitude);
-    // }, function(res){
-    //     setMap(113.62773,22.919127);
-    // });
+    getwx().then(function(res){
+        setMap(res.longitude,res.latitude);
+    }, function(res){
+        setMap(113.62773,22.919127);
+    });
     //产品详情
     $('#next').click(function () {
        location.href = 'detail.html'
