@@ -11,12 +11,14 @@ import needle from '../images/9-point.png'
 import { Indicate } from './component/indicateModule';
 import { WifiModule } from './component/WifiModule';
 import { Distribution } from './component/distributionModule';
+import { BMIFun, Index, Color } from './component/BMI-index-color'
+
 import getwx from './component/getWx';
 import setMap from './component/map';
 
 window.onload = function () {
-
     //用户基本信息处理
+    console.log(BMIFun(63,171));
     let userInformation = [
         localStorage.sexs,
         localStorage.bodyShope,
@@ -29,9 +31,13 @@ window.onload = function () {
     ];
     let userInfo = document.getElementById('userInfo');
     let allLi = userInfo.childNodes[1].children;
+    console.log(allLi);
     for(let i=0,li; li=allLi[i]; i++){
-        console.log(userInformation[i]);
-        li.children[0].innerHTML = userInformation[i]
+        if(i !== 1){
+            li.children[0].innerHTML = userInformation[i];
+        }else {
+            console.log(li.children[0].children[0].innerHTML = userInformation[i])
+        }
     }
     //男女头像处理
     let sexImg = (function () {
@@ -42,7 +48,6 @@ window.onload = function () {
             img.src = maleImg;
         }
     })();
-
     //indicate模块
     let indicateObj = {
         title: '您的体质指数：',
@@ -50,7 +55,7 @@ window.onload = function () {
         text: ['过轻','正常','过重','肥胖','特肥胖'],
         color: ['#6ddec0','#9fe04f','#ffc240','#ff6e40','#ff5177'],
         stable: stable,
-        currentNum: 50.6    //被动态传入的数据
+        currentNum: BMIFun(userInformation[4],userInformation[3])    //被动态传入的数据
     };
     let BMI = document.getElementById('BMI');
     let indicate = new Indicate(indicateObj);
@@ -60,7 +65,7 @@ window.onload = function () {
     //wifi模块
     let wifiObj = {
         title: '您的指数是：',
-        showNum: 3,  //被动态传入的数据
+        showNum: Index(userInformation[5],userInformation[6 ]),  //被动态传入的数据
         num: 5,
         text:['1','2','3','4','5'],
         width: 0.16,
@@ -75,7 +80,7 @@ window.onload = function () {
     //分布图模块
     let distributionObj = {
         title: '您的承重区域是：',
-        showName: '绿', //动态传入的数据
+        showName: Color(userInformation[4],userInformation[3]), //动态传入的数据
         text: ['较软','适中','硬','加硬'],
         bgImg: bgImg,
         needle: needle,
