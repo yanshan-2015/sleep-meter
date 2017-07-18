@@ -14,7 +14,7 @@ import { Distribution } from './component/distributionModule';
 import { BMIFun, Index, Color } from './component/BMI-index-color'
 
 import getwx from './component/getWx';
-import setMap from './component/map';
+import setMap from './component/baiduMap';
 
 window.onload = function () {
     //用户基本信息处理
