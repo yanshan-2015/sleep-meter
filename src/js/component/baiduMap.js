@@ -6,12 +6,12 @@ function setMap(longitude,latitude){
 	map.centerAndZoom(new BMap.Point(longitude,latitude), 12);                 // 初始化地图，设置中心点坐标和地图级别
 	map.enableScrollWheelZoom();
 	map.addControl(new BMap.NavigationControl());  //添加默认缩放平移控件   
-	let myIcon = new BMap.Icon("../images/9-ball.png", new BMap.Size(32, 80), {  
+	let myIcon = new BMap.Icon("../images/9-ball.png", new BMap.Size(20, 52), {  
 	  offset: new BMap.Size(0, 0), // 指定定位位置  
 	  imageOffset: new BMap.Size(0, 0) // 设置图片偏移  
 	});
 	//let hereIcon = new BMap.Icon("../images/9.you-r-here.png", new BMap.Size(72, 72), {  
-	let hereIcon = new BMap.Icon("../images/9.you-r-here.png", new BMap.Size(40, 100), {  
+	let hereIcon = new BMap.Icon("../images/9.you-r-here.png", new BMap.Size(24, 64), {  
 	  offset: new BMap.Size(0, 0), // 指定定位位置  
 	  imageOffset: new BMap.Size(0, 0) // 设置图片偏移  
 	});
