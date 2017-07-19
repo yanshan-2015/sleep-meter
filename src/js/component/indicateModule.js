@@ -54,6 +54,9 @@ Indicate.prototype.createNow = function () {
 };
 Indicate.prototype.showNow =function (n) {
     n.appendChild(this.div);
+    if(this.currentNum>100){
+        this.currentNum =100;
+    }
     this.img.style.left = this.currentNum + '%';
 };
 

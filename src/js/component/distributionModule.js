@@ -65,6 +65,7 @@ Distribution.prototype.showEle = function (n) {
 
 Distribution.prototype.rotate =function (n,m) {
     this.needle.style.transform = 'rotate('+n+'deg)';
+    this.needle.style.webkitTransform = 'rotate('+n+'deg)';
     this.showName.style.color = m;
 };
 
