@@ -7,6 +7,7 @@ import '../less/loginModule.less'
 import { Button } from './component/buttonModule'
 import { LoginElement } from './component/loginModule'
 import { Loading } from './component/loading'
+import { hiplineWC } from './component/numRangeCheck'
 
 import userImg from '../images/8-icon1.png'
 import phoneImg from '../images/8-icon2.png'
@@ -88,14 +89,21 @@ window.onload = function () {
         createElement();
         let nextButton = document.getElementById('nextButton');
         nextButton.onclick = function () {
-            if(button.checkVal(inputElement) === true){
-                localStorage.hiplineW = inputElement.value;
-                //生成用户信息验证码界面
-                login = new LoginElement(loginPram);
-                //验证界面的两个行为
-                $('#submit').bind('click',handleSubmitBtn); //提交处理
-                $('#codeSpan').bind('click',handleCheckCode); //验证码处理
+            //基础检测
+            if(button.checkVal(inputElement) === false){
+               return
             }
+            //要求检测
+            if(hiplineWC(inputElement.value) === false){
+                inputElement.value = '';
+                return
+            }
+            localStorage.hiplineW = inputElement.value;
+            //生成用户信息验证码界面
+            login = new LoginElement(loginPram);
+            //验证界面的两个行为
+            $('#submit').bind('click',handleSubmitBtn); //提交处理
+            $('#codeSpan').bind('click',handleCheckCode); //验证码处理
         };
     };
     //或者验证码

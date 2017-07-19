@@ -6,6 +6,7 @@ import '../less/common.less'
 import '../less/male-body.less'
 import {Button} from './component/buttonModule'
 import {choseObj} from './component/singleChoseModule'
+import {ageC} from './component/numRangeCheck'
 
 import img1 from '../images/body/1.png'
 import img2 from '../images/body/2.png'
@@ -32,17 +33,18 @@ window.onload = function () {
         activeImg: [img1_1,img2_1,img3_1,img4_1,img5_1,img6_1],
         imgText: ['椭圆型','圆型','正方型','长方型','沙漏型','V型']
     };
+    //下一步配置
     let checkObj = {
         dom: document.getElementsByClassName('male')[0],
         show: 'block',
         type: true,
         text: '下一步',
         url: 'height.html',
-        top: '1.2rem',
+        top: '1.18rem',
         bottom: '1.5rem',
         reg: /\d+/
     };
-
+    //体型选择处理
     let createElement = (function () {
         let choseObject = new choseObj(obj);
         choseObject.show(obj);
@@ -55,7 +57,7 @@ window.onload = function () {
             };
         }
     })();
-
+    //生成button和处理其点击事件
     let button,inputElement = document.getElementById('age');
     inputElement.onfocus = function () {
         if(!button){
@@ -65,10 +67,17 @@ window.onload = function () {
         }
         let nextButton = document.getElementById('nextButton');
         nextButton.onclick = function () {
-            if(button.checkVal(inputElement) === true){
-                localStorage.age = inputElement.value;
-                button.clickEle();
+            //基础检测
+            if(button.checkVal(inputElement) === false){
+                return
             }
+            //要求检测
+            if(ageC(inputElement.value) === false){
+                inputElement.value = '';
+                return
+            }
+            localStorage.age = inputElement.value;
+            button.clickEle();
         };
     };
 };

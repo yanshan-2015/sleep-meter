@@ -18,7 +18,6 @@ import setMap from './component/baiduMap';
 
 window.onload = function () {
     //用户基本信息处理
-    console.log(BMIFun(63,171));
     let userInformation = [
         localStorage.sexs,
         localStorage.bodyShope,
@@ -31,12 +30,11 @@ window.onload = function () {
     ];
     let userInfo = document.getElementById('userInfo');
     let allLi = userInfo.childNodes[1].children;
-    console.log(allLi);
     for(let i=0,li; li=allLi[i]; i++){
         if(i !== 1){
             li.children[0].innerHTML = userInformation[i];
         }else {
-            console.log(li.children[0].children[0].innerHTML = userInformation[i])
+            li.children[0].children[0].innerHTML = userInformation[i];
         }
     }
     //男女头像处理

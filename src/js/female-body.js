@@ -6,6 +6,7 @@ import '../less/common.less'
 import '../less/male-body.less'
 import {Button} from './component/buttonModule'
 import {choseObj} from './component/singleChoseModule'
+import {ageC} from './component/numRangeCheck'
 
 import girl1 from '../images/body/girl1.png'
 import girl2 from '../images/body/girl2.png'
@@ -23,6 +24,7 @@ import girl5_5 from '../images/body/girl5-5.png'
 import girl6_6 from '../images/body/girl6-6.png'
 import girl7_7 from '../images/body/girl7-7.png'
 window.onload = function () {
+    //多项单选配置
     let obj = {
         dom: document.getElementById('choseBody'),
         show: 'block',
@@ -32,6 +34,7 @@ window.onload = function () {
         activeImg: [ girl1_1, girl2_2, girl3_3, girl4_4, girl5_5, girl6_6, girl7_7 ],
         imgText: ['V型','H型','长方型','苹果型','梨型','细沙漏型','粗沙漏型']
     };
+    //下一步button配置
     let checkObj = {
         dom: document.getElementById('footer'),
         show: 'block',
@@ -42,6 +45,7 @@ window.onload = function () {
         bottom: '1.5rem',
         reg: ''
     };
+    //体型处理
     let createElement = (function () {
         let choseObject = new choseObj(obj);
         choseObject.show(obj);
@@ -55,6 +59,7 @@ window.onload = function () {
             };
         }
     })();
+    //按钮生成和事件绑定
     let button,inputElement = document.getElementById('age');
     inputElement.onfocus = function () {
         if(!button){
@@ -64,10 +69,17 @@ window.onload = function () {
         }
         let nextButton = document.getElementById('nextButton');
         nextButton.onclick = function () {
-            if(button.checkVal(inputElement) === true){
-                localStorage.age = inputElement.value;
-                button.clickEle();
+            //基础检测
+            if(button.checkVal(inputElement) === false){
+                return
             }
+            //要求检测
+            if(ageC(inputElement.value) === false){
+                inputElement.value = '';
+                return
+            }
+            localStorage.age = inputElement.value;
+            button.clickEle();
         };
     };
 };

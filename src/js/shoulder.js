@@ -4,6 +4,8 @@
 
 import '../less/shoulder.less'
 import { Button } from './component/buttonModule'
+import { shouderWC } from './component/numRangeCheck'
+
 window.onload = function () {
     let checkObj = {
         dom: document.getElementsByClassName('shoulder')[0],
@@ -11,7 +13,7 @@ window.onload = function () {
         type: true,
         text: '下一步',
         url: 'waistline.html',
-        top: '2.8rem',
+        top: '2.9rem',
         bottom: '1.5rem',
         reg: ''
     };
@@ -27,10 +29,17 @@ window.onload = function () {
         createElement();
         let nextButton = document.getElementById('nextButton');
         nextButton.onclick = function () {
-            if(button.checkVal(inputElement) === true){
-                localStorage.shoudlerW = inputElement.value;
-                button.clickEle();
+            //基础检测
+            if(button.checkVal(inputElement) === false){
+                return
             }
+            //要就检测
+            if(shouderWC(inputElement.value) === false){
+                inputElement.value = '';
+                return
+            }
+            localStorage.shoudlerW = inputElement.value;
+            button.clickEle();
         }
     };
 };

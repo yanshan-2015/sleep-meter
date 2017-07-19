@@ -4,6 +4,7 @@
 
 import '../less/waistline.less'
 import { Button } from './component/buttonModule'
+import { waistlineWC } from './component/numRangeCheck'
 window.onload = function () {
     let checkObj = {
         dom: document.getElementsByClassName('waistline')[0],
@@ -11,7 +12,7 @@ window.onload = function () {
         type: true,
         text: '下一步',
         url: 'hipline.html',
-        top: '3.8rem',
+        top: '3.9rem',
         bottom: '1.5rem',
         reg: ''
     };
@@ -27,10 +28,17 @@ window.onload = function () {
         createElement();
         let nextButton = document.getElementById('nextButton');
         nextButton.onclick = function () {
-            if(button.checkVal(inputElement) === true){
-                localStorage.waistlineW = inputElement.value;
-                button.clickEle();
+            //基础检测
+            if(button.checkVal(inputElement) === false){
+                return
             }
+            //要求检测
+            if(waistlineWC(inputElement.value) === false){
+                inputElement.value = '';
+                return
+            }
+            localStorage.waistlineW = inputElement.value;
+            button.clickEle();
         }
     };
 };
