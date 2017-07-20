@@ -31,11 +31,7 @@ window.onload = function () {
     let userInfo = document.getElementById('userInfo');
     let allLi = userInfo.childNodes[1].children;
     for(let i=0,li; li=allLi[i]; i++){
-        if(i !== 1){
-            li.children[0].innerHTML = userInformation[i];
-        }else {
-            li.children[0].children[0].innerHTML = userInformation[i];
-        }
+        li.children[0].children[0].innerHTML = userInformation[i];
     }
     //男女头像处理
     let sexImg = (function () {
