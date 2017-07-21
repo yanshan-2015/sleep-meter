@@ -54,10 +54,27 @@ Indicate.prototype.createNow = function () {
 };
 Indicate.prototype.showNow =function (n) {
     n.appendChild(this.div);
-    if(this.currentNum>100){
-        this.currentNum =100;
-    }
-    this.img.style.left = this.currentNum + '%';
+    let leftVal = valueRanges(this.currentNum);
+    this.img.style.left = leftVal + '%';
 };
+function valueRanges(x) {
+    if(x>100) x =100;
+
+    if(x<18.5){
+        return x*(20/18.5).toFixed(3);
+    }
+    else if(18.5<=x && x<25){
+        return 20+(x-18.5)*(20/6.5).toFixed(3);
+    }
+    else if(25<=x && x<30){
+        return 40+(x-25)*(20/5).toFixed(3);
+    }
+    else if(30<=x && x<35){
+        return 60+(x-30)*(20/5).toFixed(3);
+    }
+    else if(35<=x){
+        return 80+(x-35)*(20/65).toFixed(3)
+    }
+}
 
 export { Indicate }

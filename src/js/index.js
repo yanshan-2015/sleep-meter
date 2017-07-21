@@ -12,8 +12,7 @@ window.onload = function () {
         type: false,
         text: '开始测试',
         url: null,
-        top: '1.55rem',
-        bottom: '1.5rem'
+        footerH: '3rem'
     };
     //性别选择
     let choseSex = (function () {

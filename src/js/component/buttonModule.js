@@ -17,44 +17,50 @@ let Button = function (n) {
     this.show = n.show || 'block';
     this.type = n.type || false;
     this.url = n.url||'';
-    this.top = n.top|| '1.2rem';
-    this.bottom = n.bottom|| '1.2rem';
+    this.top = n.top|| '0';
+    this.bottom = n.bottom|| '0';
     this.reg = n.reg||/\d+/;
+    this.footerH = n.footerH
 };
 Button.prototype.createEle = function () {
     let p = document.createElement('p');
+    this.p = p;
+    p.style.width = '64%';
+    p.style.margin = '0 auto';
     p.style.textAlign = 'center';
     p.style.fontSize = '0.53rem';
     p.style.color = '#f2f6f9';
+    p.style.background = '-webkit-linear-gradient(left, #75c7f0 , #74a0ef)';
+    p.style.boxShadow = '0 20px 20px #b7cef4';
+    p.style.borderRadius = '0.15rem';
     p.innerHTML = this.text;
     let div = document.createElement('div');
     this.div = div;
     div.setAttribute('id','nextButton');
-    div.style.width = '64%';
+    div.style.position = 'fixed';
+    div.style.bottom = '1.2rem';
+    div.style.width = '100%';
     div.style.height = '1.2rem';
-    div.style.margin = '0 auto';
     div.style.lineHeight = '1.2rem';
-    div.style.borderRadius = '0.15rem';
-    div.style.background = '-webkit-linear-gradient(left, #75c7f0 , #74a0ef)';
-    div.style.boxShadow = '0 20px 20px #b7cef4';
     div.appendChild(p);
     let footer = document.createElement('div');
     footer.setAttribute('id','footer');
     footer.style.paddingTop = this.top;
     footer.style.paddingBottom = this.bottom;
-    footer.appendChild(div);
+    footer.style.height = this.footerH;
     this.footer = footer;
 };
 Button.prototype.showEle = function () {
     this.dom.appendChild(this.footer);
     this.footer.style.display = this.show;
+    document.body.appendChild(this.div);
     console.log(this.compareH());
 };
 Button.prototype.clickEle = function () {
     if(this.type === false){
         return
     }
-    this.div.style.background = "#74a0ef";
+    this.p.style.background = "#74a0ef";
     location.href = this.url;
 };
 Button.prototype.compareH = function () {

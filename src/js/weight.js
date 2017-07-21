@@ -12,8 +12,7 @@ window.onload = function () {
         type: true,
         text: '下一步',
         url: 'shoulder.html',
-        top: '0.4rem',
-        bottom: '1.5rem',
+        footerH: '3rem',
         reg: ''
     };
     let button,inputElement = document.getElementById('bodyW');

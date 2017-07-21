@@ -41,9 +41,8 @@ window.onload = function () {
         type: true,
         text: '下一步',
         url: 'height.html',
-        top: '1.2rem',
-        bottom: '1.5rem',
-        reg: ''
+        reg: '',
+        footerH: '3rem'
     };
     //体型处理
     let createElement = (function () {
