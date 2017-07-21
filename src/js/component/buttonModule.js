@@ -54,6 +54,7 @@ Button.prototype.showEle = function () {
     this.dom.appendChild(this.footer);
     this.footer.style.display = this.show;
     document.body.appendChild(this.div);
+    this.compareH();
     console.log(this.compareH());
 };
 Button.prototype.clickEle = function () {
@@ -65,13 +66,12 @@ Button.prototype.clickEle = function () {
 };
 Button.prototype.compareH = function () {
     let body = this.footer.parentNode.parentNode;
-    let bodyH = body.clientHeight;
+    let bodyH = document.documentElement.clientHeight;
     let pageH = this.footer.parentNode.clientHeight;
     if(pageH>bodyH){
-        body.style.height = 'auto';
-        return -1 //body要释放度量,才能压制暴涨要溢出的手下
-    }else {
-        return 1 //body够用，怡然自得
+         body.style.height = 'auto';
+         window.scrollTo(0, document.body.scrollHeight);
+        return -1
     }
 };
 Button.prototype.checkVal = function (n) {

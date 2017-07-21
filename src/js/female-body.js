@@ -36,13 +36,13 @@ window.onload = function () {
     };
     //下一步button配置
     let checkObj = {
-        dom: document.getElementById('footer'),
+        dom: document.getElementsByClassName('male')[0],
         show: 'block',
         type: true,
         text: '下一步',
         url: 'height.html',
         reg: '',
-        footerH: '3rem'
+        footerH: '4rem'
     };
     //体型处理
     let createElement = (function () {

@@ -23,7 +23,7 @@ window.onload = function () {
         type: true,
         text: '获取报告',
         url: '',
-        footerH: '3rem'
+        footerH: '8rem'
     };
     //登录界面配置参数
     let loginPram = {

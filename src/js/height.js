@@ -14,7 +14,7 @@ window.onload = function () {
         type: true,
         text: '下一步',
         url: 'weight.html',
-        footerH: '3rem',
+        footerH: '9rem',
         reg: ''
     };
     let button,inputElement = document.getElementById('bodyH');

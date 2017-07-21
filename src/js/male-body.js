@@ -40,7 +40,7 @@ window.onload = function () {
         type: true,
         text: '下一步',
         url: 'height.html',
-        footerH: '3rem',
+        footerH: '4rem',
         reg: /\d+/
     };
     //体型选择处理
