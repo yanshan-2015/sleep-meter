@@ -49,7 +49,7 @@ window.onload = function () {
         text: ['过轻','正常','过重','肥胖','特肥胖'],
         color: ['#6ddec0','#9fe04f','#ffc240','#ff6e40','#ff5177'],
         stable: stable,
-        currentNum: 60//BMIFun(userInformation[4],userInformation[3])    //被动态传入的数据
+        currentNum: BMIFun(userInformation[4],userInformation[3])    //被动态传入的数据
     };
     let BMI = document.getElementById('BMI');
     let indicate = new Indicate(indicateObj);

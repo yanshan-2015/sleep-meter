@@ -145,11 +145,11 @@ window.onload = function () {
     //验证码定时器
     function setTime(n,m,dom) {
         $('#codeSpan').unbind('click',handleCheckCode);
-        dom.innerHTML = m;
+        dom.innerHTML = '还剩'+m+'秒';
         dom.style.backgroundColor = '#e1e1e1';
         let time = setInterval(function () {
             m--;
-            dom.innerHTML = m;
+            dom.innerHTML = '还剩'+m+'秒';
             if(m === 0){
                 clearInterval(time);
                 dom.innerHTML = '重新发送';

@@ -37,25 +37,26 @@ Button.prototype.createEle = function () {
     let div = document.createElement('div');
     this.div = div;
     div.setAttribute('id','nextButton');
-    div.style.position = 'fixed';
+    div.style.position = 'absolute';
     div.style.bottom = '1.2rem';
+    div.style.zIndex = '1';
     div.style.width = '100%';
     div.style.height = '1.2rem';
     div.style.lineHeight = '1.2rem';
     div.appendChild(p);
     let footer = document.createElement('div');
     footer.setAttribute('id','footer');
+    footer.style.position = 'relative';
     footer.style.paddingTop = this.top;
     footer.style.paddingBottom = this.bottom;
     footer.style.height = this.footerH;
     this.footer = footer;
+    this.footer.appendChild(this.div);
 };
 Button.prototype.showEle = function () {
     this.dom.appendChild(this.footer);
     this.footer.style.display = this.show;
-    document.body.appendChild(this.div);
-    this.compareH();
-    console.log(this.compareH());
+    //this.compareH();
 };
 Button.prototype.clickEle = function () {
     if(this.type === false){
@@ -64,16 +65,16 @@ Button.prototype.clickEle = function () {
     this.p.style.background = "#74a0ef";
     location.href = this.url;
 };
-Button.prototype.compareH = function () {
-    let body = this.footer.parentNode.parentNode;
+/*Button.prototype.compareH = function () {
     let bodyH = document.documentElement.clientHeight;
-    let pageH = this.footer.parentNode.clientHeight;
+    let page = document.body.children[0];
+    let pageH = page.scrollHeight; //page height
     if(pageH>bodyH){
-         body.style.height = 'auto';
-         window.scrollTo(0, document.body.scrollHeight);
+        this.footer.parentNode.style.height = 'auto';
+        page.scrollTop = page.scrollHeight;
         return -1
     }
-};
+};*/
 Button.prototype.checkVal = function (n) {
     if(this.reg.test(n.value) === false){
         alert('请输入正确数值');
