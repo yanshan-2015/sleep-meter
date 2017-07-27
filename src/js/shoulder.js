@@ -13,7 +13,7 @@ window.onload = function () {
         type: true,
         text: '下一步',
         url: 'waistline.html',
-        footerH: '6rem',
+        footerH: '4rem',
         reg: ''
     };
     let button,inputElement = document.getElementById('shoulderW');

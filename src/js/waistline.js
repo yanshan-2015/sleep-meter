@@ -12,7 +12,7 @@ window.onload = function () {
         type: true,
         text: '下一步',
         url: 'hipline.html',
-        footerH: '7rem',
+        footerH: '4.5rem',
         reg: ''
     };
     let button,inputElement = document.getElementById('waistlineW');
