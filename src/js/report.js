@@ -59,7 +59,7 @@ window.onload = function () {
     //wifi模块
     let wifiObj = {
         title: '您的指数是：',
-        showNum: Index(userInformation[5],userInformation[6 ]),  //被动态传入的数据
+        showNum: Index(userInformation[5],userInformation[7]),  //被动态传入的数据
         num: 5,
         text:['1','2','3','4','5'],
         width: 0.16,

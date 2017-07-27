@@ -99,7 +99,31 @@ window.onload = function () {
             }
             localStorage.hiplineW = inputElement.value;
             //生成用户信息验证码界面
-            login = new LoginElement(loginPram);
+
+
+            /****************************/
+            /*暂时开启*/
+
+            $.ajax({
+                type: 'POSt',
+                url: ajaxParam.url,
+                data: ajaxParam.data,
+                dataType: 'jsonp',
+                jsonp: 'jsoncallback',
+                success: function (data) {
+                    if(data.msg === 'OK'){
+                        alert('数据已提交');
+                        location.href = 'report.html';
+                    }else {
+                        alert('数据库异常，请尝试重新提交');
+                    }
+                }
+            });
+
+            /****************************/
+            /*暂时屏蔽*/
+            //login = new LoginElement(loginPram);
+
             //验证界面的两个行为
             $('#submit').bind('click',handleSubmitBtn); //提交处理
             $('#codeSpan').bind('click',handleCheckCode); //验证码处理
