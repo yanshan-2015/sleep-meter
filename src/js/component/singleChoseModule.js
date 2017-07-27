@@ -20,22 +20,26 @@ let choseObj = function (n) {
     ul.className = 'chose';
     ul.style.position = 'relative';
     ul.style.width = '100%';
-    ul.style.height = '6rem';
+    //ul.style.height = '6rem';
+    ul.style.height = 'auto';
     ul.style.margin = '0 auto';
     ul.style.overflow = 'hidden';
 
     for(let i=0; i<n.num; i++){
         let li = document.createElement('li');
-        li.style.position = 'absolute';
-        li.style.bottom = '0';
-        li.style.left = i*(100/n.num)+'%';
+        // li.style.position = 'absolute';
+        // li.style.bottom = '0';
+        // li.style.left = i*(100/n.num)+'%';
+        li.style.float = 'left';
+        li.style.textAlign = 'center';
         li.style.width = (100/n.num)+'%';
         li.style.backgroundColor = '';
 
         let img = new Image();
         img.src = n.originImg[i];
         img.style.width = '100%';
-        img.style.height = 'auto';
+        //img.style.height = 'auto';
+        img.style.height = '5rem';
 
         let p = document.createElement('p');
         p.innerHTML = n.imgText[i];
