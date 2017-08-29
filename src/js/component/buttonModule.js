@@ -1,7 +1,7 @@
 /**********************************************
  * Created by yanshan on 2017/6/27.
- * 普通'下一步'按钮模块处理
- * 创建如下对象:
+ * '下一步'按钮模块
+ * 需要创建如下对象作为参数传入:
  * let checkObj = {
         dom: document.getElementById('footer'),
         show: 'block',
@@ -11,6 +11,7 @@
         bottom: '1.5rem'
     };
  **********************************************/
+//构造函数
 let Button = function (n) {
     this.text = n.text||'按钮';
     this.dom = n.dom || document.body;
@@ -22,6 +23,7 @@ let Button = function (n) {
     this.reg = n.reg||/\d+/;
     this.footerH = n.footerH
 };
+//生成nextButton
 Button.prototype.createEle = function () {
     let p = document.createElement('p');
     this.p = p;

@@ -4,7 +4,7 @@
 //BMI计算方式，x代表体重，y代表身高
 let BMIFun = function (x, y) {
     let height = y/100;
-    return (x/(height*height)).toFixed(1);
+    return (x/(height*height)).toFixed(2);
 };
 //指数计算方式，x代表肩宽，y代表臀围
 let Index = function (x, y) {
@@ -19,7 +19,7 @@ let Index = function (x, y) {
 //计算承重区域颜色，x代表体重，y代表身高
 let Color = function (x, y) {
     let height = y/100;
-    let result = (x/(height*height)).toFixed(1);
+    let result = (x/(height*height)).toFixed(2);
     return colorCompare(result);
 };
 
