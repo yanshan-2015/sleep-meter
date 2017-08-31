@@ -78,6 +78,11 @@ window.onload = function () {
                 inputElement.value = '';
                 return
             }
+            //追加体型检测 2017/8/31
+            if(localStorage.bodyShope === undefined){
+                alert('请选择体型');
+                return
+            }
             localStorage.age = inputElement.value;
             button.clickEle();
         };
