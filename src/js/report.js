@@ -31,11 +31,7 @@ window.onload = function () {
     let userInfo = document.getElementById('userInfo');
     let allLi = userInfo.childNodes[1].children;
     for(let i=0,li; li=allLi[i]; i++){
-        if(i !== 1){
-            li.children[0].innerHTML = userInformation[i];
-        }else {
-            li.children[0].children[0].innerHTML = userInformation[i];
-        }
+        li.children[0].children[0].innerHTML = userInformation[i];
     }
     //男女头像处理
     let sexImg = (function () {
@@ -63,7 +59,7 @@ window.onload = function () {
     //wifi模块
     let wifiObj = {
         title: '您的指数是：',
-        showNum: Index(userInformation[5],userInformation[6 ]),  //被动态传入的数据
+        showNum: Index(userInformation[5],userInformation[7]),  //被动态传入的数据
         num: 5,
         text:['1','2','3','4','5'],
         width: 0.16,

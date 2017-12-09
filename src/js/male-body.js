@@ -1,9 +1,12 @@
 /**
  * Created by yanshan on 2017/6/28.
+ * version 3.1.2
  */
 
+//全局样式和页面样式依赖引入
 import '../less/common.less'
 import '../less/male-body.less'
+//模块化编程之button模块、choseObj模块、ageC模块引入
 import {Button} from './component/buttonModule'
 import {choseObj} from './component/singleChoseModule'
 import {ageC} from './component/numRangeCheck'
@@ -25,13 +28,13 @@ import img6_1 from '../images/body/6-1.png'
 window.onload = function () {
     //各自拥有两种状态并进行单选
     let obj = {
-        dom: document.getElementById('choseBody'),
-        show: 'block',
-        sex: 'male',
-        num: 6,
-        originImg: [img1,img2,img3,img4,img5,img6],
-        activeImg: [img1_1,img2_1,img3_1,img4_1,img5_1,img6_1],
-        imgText: ['椭圆型','圆型','正方型','长方型','沙漏型','V型']
+        dom: document.getElementById('choseBody'),  //需要插入的地方
+        show: 'block',  //是否显示，为none时隐藏
+        sex: 'male',    //此为男性图，为female是女性图，
+        num: 6,         //6列
+        originImg: [img1,img2,img3,img4,img5,img6],   //原图数组
+        activeImg: [img1_1,img2_1,img3_1,img4_1,img5_1,img6_1],   //切换图数组
+        imgText: ['椭圆型','圆型','正方型','长方型','沙漏型','V型']    //每一图的说明
     };
     //下一步配置
     let checkObj = {
@@ -40,8 +43,7 @@ window.onload = function () {
         type: true,
         text: '下一步',
         url: 'height.html',
-        top: '1.18rem',
-        bottom: '1.5rem',
+        footerH: '4rem',
         reg: /\d+/
     };
     //体型选择处理
@@ -74,6 +76,11 @@ window.onload = function () {
             //要求检测
             if(ageC(inputElement.value) === false){
                 inputElement.value = '';
+                return
+            }
+            //追加体型检测 2017/8/31
+            if(localStorage.bodyShope === undefined){
+                alert('请选择体型');
                 return
             }
             localStorage.age = inputElement.value;

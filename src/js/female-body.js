@@ -36,14 +36,13 @@ window.onload = function () {
     };
     //下一步button配置
     let checkObj = {
-        dom: document.getElementById('footer'),
+        dom: document.getElementsByClassName('male')[0],
         show: 'block',
         type: true,
         text: '下一步',
         url: 'height.html',
-        top: '1.2rem',
-        bottom: '1.5rem',
-        reg: ''
+        reg: '',
+        footerH: '4rem'
     };
     //体型处理
     let createElement = (function () {
@@ -76,6 +75,11 @@ window.onload = function () {
             //要求检测
             if(ageC(inputElement.value) === false){
                 inputElement.value = '';
+                return
+            }
+            //追加体型检测 2017/8/31
+            if(localStorage.bodyShope === undefined){
+                alert('请选择体型');
                 return
             }
             localStorage.age = inputElement.value;
