@@ -101,7 +101,8 @@ window.onload = function () {
         setMap(113.62773,22.919127);
     });
     //产品详情
+    let indexNum = Index(userInformation[5],userInformation[7]);
     $('#next').click(function () {
-       location.href = 'detail.html'
+       location.href = 'detail.html?indexNum='+indexNum
     });
 };
